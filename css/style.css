@@ -387,3 +387,52 @@ body {
   stroke-linejoin: round;
   opacity: 0.15;
 }
+
+/* Lazy Loading - Blur-Up Transition for SVG Images */
+.lazy-svg {
+  filter: blur(15px);
+  transition: filter 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
+  will-change: filter;
+}
+
+.lazy-svg.loaded {
+  filter: blur(0);
+}
+
+/* Skeleton shimmer placeholder while image loads */
+.lazy-svg-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.lazy-svg-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.06) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmerGold 1.8s ease-in-out infinite;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  transition: opacity 0.5s ease;
+}
+
+.lazy-svg-wrapper.loaded::before {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes shimmerGold {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}

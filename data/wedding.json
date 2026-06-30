@@ -6,7 +6,7 @@
       "ayah": "Supamiyanto",
       "ibu": "Ibu Lilik Kirana Dewi",
       "instagram": "",
-      "foto": "images/groom.jpg"
+      "foto": "images/groom.svg"
     },
     "wanita": {
       "nama_lengkap": "Fira Alfiana Suhadi",
@@ -14,7 +14,7 @@
       "ayah": "Bapak Dede Suhadi",
       "ibu": "",
       "instagram": "",
-      "foto": "images/bride.jpg"
+      "foto": "images/bride.svg"
     }
   },
   "acara": {
@@ -61,9 +61,9 @@
     }
   ],
   "galeri": [
-    "images/gallery1.jpg",
-    "images/gallery2.jpg",
-    "images/gallery3.jpg"
+    "images/gallery1.svg",
+    "images/gallery2.svg",
+    "images/gallery3.svg"
   ],
   "video": {
     "youtube_id": "dQw4w9WgXcQ"
@@ -92,7 +92,7 @@
   "meta": {
     "title": "Undangan Pernikahan Burhan & Fira",
     "description": "Dengan penuh rasa syukur, kami mengundang Anda untuk menghadiri dan mendoakan pernikahan kami: Burhanudin Gunawan & Fira Alfiana Suhadi.",
-    "og_image": "images/cover.jpg"
+    "og_image": "images/cover.svg"
   },
   "ayat": {
     "teks_ar": "وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةً ۗ اِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ",

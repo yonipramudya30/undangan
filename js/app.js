@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
       initCalendarSync(data);
       initEnvelopeCopy(data);
       setupMusic(data.music);
+      initLazyLoadSVG();
       initPetals();
       initCustomCursor();
       initScrollProgressBar();
@@ -95,8 +96,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("ayat-sumber").innerText = data.ayat.sumber;
 
     // Mempelai Profiles
-    // Groom (Pria)
-    document.getElementById("groom-img").src = data.mempelai.pria.foto;
+    // Groom (Pria) - Use JPG placeholder, lazy load SVG
+    const groomImg = document.getElementById("groom-img");
+    groomImg.src = data.mempelai.pria.foto.replace('.svg', '.jpg');
+    groomImg.dataset.srcSvg = data.mempelai.pria.foto;
     document.getElementById("groom-fullname").innerText = data.mempelai.pria.nama_lengkap;
     document.getElementById("groom-parents").innerText = `Putra dari ${data.mempelai.pria.ayah} & ${data.mempelai.pria.ibu}`;
     const groomIg = document.getElementById("groom-instagram");
@@ -107,8 +110,10 @@ document.addEventListener("DOMContentLoaded", () => {
       groomIg.style.display = "none";
     }
 
-    // Bride (Wanita)
-    document.getElementById("bride-img").src = data.mempelai.wanita.foto;
+    // Bride (Wanita) - Use JPG placeholder, lazy load SVG
+    const brideImg = document.getElementById("bride-img");
+    brideImg.src = data.mempelai.wanita.foto.replace('.svg', '.jpg');
+    brideImg.dataset.srcSvg = data.mempelai.wanita.foto;
     document.getElementById("bride-fullname").innerText = data.mempelai.wanita.nama_lengkap;
     document.getElementById("bride-parents").innerText = data.mempelai.wanita.ibu 
       ? `Putri dari ${data.mempelai.wanita.ayah} & ${data.mempelai.wanita.ibu}`
@@ -178,9 +183,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const galleryGrid = document.getElementById("gallery-grid");
     galleryGrid.innerHTML = "";
     data.galeri.forEach((imgSrc, idx) => {
+      const jpgSrc = imgSrc.replace('.svg', '.jpg');
       const item = `
-        <div class="overflow-hidden rounded-2xl cursor-pointer group shadow-sm hover:shadow-lg transition-all duration-500 relative aos-init" data-aos="fade-up" data-aos-delay="${idx * 150}">
-          <img src="${imgSrc}" alt="Prewedding Burhan & Fira ${idx + 1}" class="w-full h-72 object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy" />
+        <div class="overflow-hidden rounded-2xl cursor-pointer group shadow-sm hover:shadow-lg transition-all duration-500 relative lazy-svg-wrapper aos-init" data-aos="fade-up" data-aos-delay="${idx * 150}">
+          <img src="${jpgSrc}" data-src-svg="${imgSrc}" alt="Prewedding Burhan & Fira ${idx + 1}" class="w-full h-72 object-cover transition-transform duration-700 ease-out group-hover:scale-110 lazy-svg" loading="lazy" />
           <div class="absolute inset-0 bg-stone-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
             <div class="w-12 h-12 rounded-full glass flex items-center justify-center text-gold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
               <i class="fas fa-search-plus"></i>
@@ -882,6 +888,76 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     petalsAnimationId = requestAnimationFrame(animatePetals);
+  }
+
+  // 15. Lazy Loading SVG Images with IntersectionObserver
+  function initLazyLoadSVG() {
+    const lazyImages = document.querySelectorAll('img.lazy-svg[data-src-svg]');
+    
+    if (!lazyImages.length) return;
+
+    // Use IntersectionObserver for efficient viewport-based loading
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            const svgSrc = img.dataset.srcSvg;
+            
+            if (svgSrc) {
+              // Preload the SVG in background
+              const preloadImg = new Image();
+              preloadImg.onload = () => {
+                // Swap to SVG source
+                img.src = svgSrc;
+                // Trigger blur-up transition
+                img.classList.add('loaded');
+                // Mark wrapper as loaded to hide shimmer
+                const wrapper = img.closest('.lazy-svg-wrapper');
+                if (wrapper) {
+                  wrapper.classList.add('loaded');
+                }
+                // Clean up data attribute
+                delete img.dataset.srcSvg;
+              };
+              preloadImg.onerror = () => {
+                // Fallback: keep JPG, still remove blur
+                img.classList.add('loaded');
+                const wrapper = img.closest('.lazy-svg-wrapper');
+                if (wrapper) {
+                  wrapper.classList.add('loaded');
+                }
+                console.warn('Failed to load SVG:', svgSrc);
+              };
+              preloadImg.src = svgSrc;
+            }
+            
+            // Stop observing this image
+            observer.unobserve(img);
+          }
+        });
+      }, {
+        rootMargin: '200px 0px', // Start loading 200px before entering viewport
+        threshold: 0.01
+      });
+
+      lazyImages.forEach(img => {
+        imageObserver.observe(img);
+      });
+    } else {
+      // Fallback for browsers without IntersectionObserver
+      lazyImages.forEach(img => {
+        const svgSrc = img.dataset.srcSvg;
+        if (svgSrc) {
+          img.src = svgSrc;
+          img.classList.add('loaded');
+          const wrapper = img.closest('.lazy-svg-wrapper');
+          if (wrapper) {
+            wrapper.classList.add('loaded');
+          }
+        }
+      });
+    }
   }
 
   // Micro interaction - Button ripple effects

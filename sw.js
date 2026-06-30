@@ -5,12 +5,12 @@ const ASSETS = [
   '/css/style.css',
   '/js/app.js',
   '/data/wedding.json',
-  '/images/cover.jpg',
-  '/images/groom.jpg',
-  '/images/bride.jpg',
-  '/images/gallery1.jpg',
-  '/images/gallery2.jpg',
-  '/images/gallery3.jpg',
+  '/images/cover.svg',
+  '/images/groom.svg',
+  '/images/bride.svg',
+  '/images/gallery1.svg',
+  '/images/gallery2.svg',
+  '/images/gallery3.svg',
   '/manifest.json'
 ];
 
