@@ -1,0 +1,389 @@
+/* style.css - Premium Luxury Custom Styles */
+
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@200;300;400;500;600;700&display=swap');
+
+/* Basic setup and CSS Variables */
+:root {
+  --champagne-gold: #D4AF37;
+  --soft-gold: #E5C158;
+  --gold-light: #F3E5AB;
+  --bg-ivory: #FDFBF7;
+  --bg-cream: #FAF6EE;
+  --text-dark: #1E1A15;
+  --text-gray: #4A463F;
+  --glass-bg: rgba(253, 251, 247, 0.7);
+  --glass-border: rgba(212, 175, 55, 0.2);
+  --font-title: 'Cormorant Garamond', serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-ivory);
+  color: var(--text-dark);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--champagne-gold);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--soft-gold);
+}
+
+/* Scroll Progress Bar */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--champagne-gold), var(--soft-gold));
+  width: 0%;
+  z-index: 1000;
+  transition: width 0.1s ease-out;
+}
+
+/* Desktop Custom Cursor */
+#custom-cursor {
+  width: 24px;
+  height: 24px;
+  border: 1.5px solid var(--champagne-gold);
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  mix-blend-mode: difference;
+  display: none;
+}
+
+#custom-cursor-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--champagne-gold);
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  display: none;
+}
+
+@media (min-width: 1024px) {
+
+  body.has-custom-cursor #custom-cursor,
+  body.has-custom-cursor #custom-cursor-dot {
+    display: block;
+  }
+
+  body.has-custom-cursor a,
+  body.has-custom-cursor button,
+  body.has-custom-cursor input,
+  body.has-custom-cursor select,
+  body.has-custom-cursor textarea,
+  body.has-custom-cursor [role="button"] {
+    cursor: none;
+  }
+}
+
+/* Hover state for custom cursor */
+.cursor-hover {
+  width: 48px !important;
+  height: 48px !important;
+  background-color: rgba(212, 175, 55, 0.1) !important;
+  border-color: var(--soft-gold) !important;
+}
+
+/* Fonts styling */
+.font-title {
+  font-family: var(--font-title);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+/* Glassmorphism Styles */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-nav {
+  background: rgba(253, 251, 247, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+}
+
+/* Custom Gradients & Accents */
+.text-gold {
+  color: var(--champagne-gold);
+  background: linear-gradient(135deg, var(--champagne-gold) 0%, var(--soft-gold) 50%, var(--gold-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, var(--champagne-gold) 0%, var(--soft-gold) 100%);
+}
+
+.border-gold {
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+.border-gold-focus:focus {
+  border-color: var(--champagne-gold);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+}
+
+/* Loading & Open Transitions */
+#loading-screen {
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.8s;
+}
+
+#cover-screen {
+  transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1), opacity 1.2s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+/* Equalizer Visualizer */
+.equalizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  width: 24px;
+  height: 20px;
+}
+
+.eq-bar {
+  width: 3px;
+  height: 2px;
+  background-color: var(--champagne-gold);
+  border-radius: 2px;
+  transition: height 0.1s ease;
+}
+
+.eq-bar.animating {
+  animation: eqBounce 1.2s ease-in-out infinite alternate;
+}
+
+.eq-bar:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.eq-bar:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.eq-bar:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+.eq-bar:nth-child(4) {
+  animation-delay: 0.2s;
+}
+
+@keyframes eqBounce {
+  0% {
+    height: 2px;
+  }
+
+  100% {
+    height: 20px;
+  }
+}
+
+/* Custom Floating Floral Animations */
+.floating-floral {
+  pointer-events: none;
+  animation: floatFloral 8s ease-in-out infinite alternate;
+}
+
+.floating-floral-delayed {
+  pointer-events: none;
+  animation: floatFloral 10s ease-in-out infinite alternate-reverse;
+  animation-delay: 2s;
+}
+
+@keyframes floatFloral {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(-15px) rotate(5deg);
+  }
+}
+
+/* Particle / Petals Canvas */
+#petals-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Smooth zoom-in for Cover Photo */
+.zoom-in-bg {
+  animation: zoomInCover 20s ease-out infinite alternate;
+}
+
+@keyframes zoomInCover {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.08);
+  }
+}
+
+/* Custom Lightbox */
+.lightbox-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 12, 10, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-content {
+  max-width: 90%;
+  max-height: 80%;
+  transform: scale(0.9);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.lightbox-modal.active .lightbox-content {
+  transform: scale(1);
+}
+
+/* Floating Label Animation */
+.floating-label-group {
+  position: relative;
+}
+
+.floating-label-group input:placeholder-shown~label,
+.floating-label-group textarea:placeholder-shown~label {
+  font-size: 0.95rem;
+  top: 1rem;
+  left: 1rem;
+  color: var(--text-gray);
+  opacity: 0.6;
+}
+
+.floating-label-group label,
+.floating-label-group input:focus~label,
+.floating-label-group input:not(:placeholder-shown)~label,
+.floating-label-group textarea:focus~label,
+.floating-label-group textarea:not(:placeholder-shown)~label {
+  position: absolute;
+  left: 1rem;
+  top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--champagne-gold);
+  opacity: 1;
+  transition: all 0.2s ease;
+  pointer-events: none;
+}
+
+.floating-label-group input,
+.floating-label-group textarea {
+  padding-top: 1.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Timelines Style */
+.timeline-line {
+  background: linear-gradient(180deg, var(--champagne-gold) 0%, rgba(212, 175, 55, 0.1) 100%);
+}
+
+.timeline-dot {
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2);
+}
+
+/* Magnetic / Ripple Button Micro-interaction */
+.btn-magnetic {
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.ripple-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  transform: scale(0);
+  animation: rippleEffect 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes rippleEffect {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Toast Message */
+.toast-container {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  opacity: 0;
+  z-index: 10000;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+}
+
+.toast-container.active {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* Floral decoration illustrations */
+.floral-svg {
+  fill: none;
+  stroke: var(--champagne-gold);
+  stroke-width: 0.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.15;
+}
