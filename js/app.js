@@ -110,7 +110,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Bride (Wanita)
     document.getElementById("bride-img").src = data.mempelai.wanita.foto;
     document.getElementById("bride-fullname").innerText = data.mempelai.wanita.nama_lengkap;
-    document.getElementById("bride-parents").innerText = `Putri dari ${data.mempelai.wanita.ayah} & ${data.mempelai.wanita.ibu}`;
+    document.getElementById("bride-parents").innerText = data.mempelai.wanita.ibu 
+      ? `Putri dari ${data.mempelai.wanita.ayah} & ${data.mempelai.wanita.ibu}`
+      : `Putri dari ${data.mempelai.wanita.ayah}`;
     const brideIg = document.getElementById("bride-instagram");
     if (data.mempelai.wanita.instagram) {
       brideIg.href = `https://instagram.com/${data.mempelai.wanita.instagram}`;
@@ -140,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // For simplicity and premium loading, we use an embed layout of Jakarta Kuningan place
     const embedIframe = document.getElementById("maps-iframe");
     if (embedIframe) {
-      embedIframe.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.305988185885!2d106.83296681023773!3d-6.2233289937402245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3fa0f12c1b9%3A0xea5f4c51bb4c5409!2sThe%20Glass%20House!5e0!3m2!1sid!2sid!4v1719230000000!5m2!1sid!2sid";
+      embedIframe.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.5229614488344!2d106.73068071131102!3d-6.293168561440854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f15bd0a224ef%3A0x8722c31febc4a0cc!2sIndomaret+Cendrawasih+74!5e0!3m2!1sid!2sid!4v1719230000000!5m2!1sid!2sid";
     }
     const mapGlobalBtn = document.getElementById("global-map-btn");
     if (mapGlobalBtn) {
@@ -178,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
     data.galeri.forEach((imgSrc, idx) => {
       const item = `
         <div class="overflow-hidden rounded-2xl cursor-pointer group shadow-sm hover:shadow-lg transition-all duration-500 relative aos-init" data-aos="fade-up" data-aos-delay="${idx * 150}">
-          <img src="${imgSrc}" alt="Prewedding Clara & Adrian ${idx + 1}" class="w-full h-72 object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy" />
+          <img src="${imgSrc}" alt="Prewedding Burhan & Fira ${idx + 1}" class="w-full h-72 object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy" />
           <div class="absolute inset-0 bg-stone-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
             <div class="w-12 h-12 rounded-full glass flex items-center justify-center text-gold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
               <i class="fas fa-search-plus"></i>
@@ -653,8 +655,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // 12. Calendar Sync logic (Google, ICS, Outlook)
   function initCalendarSync(data) {
     // Generate .ICS file format content for local devices download (Apple Calendar)
-    const startDate = "20261018T080000+0700";
-    const endDate = "20261018T140000+0700";
+    const startDate = "20260808T080000+0700";
+    const endDate = "20260809T140000+0700";
     const title = `Pernikahan ${data.mempelai.pria.nama_panggilan} & ${data.mempelai.wanita.nama_panggilan}`;
     const description = `Mohon doa restu Anda pada hari bahagia kami. Resepsi diselenggarakan di ${data.acara.resepsi.tempat}, Alamat: ${data.acara.resepsi.alamat}`;
     const location = data.acara.resepsi.tempat;
@@ -679,7 +681,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Bind Google Calendar button
     const googleBtn = document.getElementById("cal-google");
     if (googleBtn) {
-      const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=20261018T010000Z/20261018T070000Z&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`;
+      const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=20260808T010000Z/20260809T070000Z&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`;
       googleBtn.href = gCalUrl;
     }
 
@@ -693,7 +695,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Bind Outlook Calendar button
     const outlookBtn = document.getElementById("cal-outlook");
     if (outlookBtn) {
-      const outCalUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=${encodeURIComponent(title)}&startdt=2026-10-18T08:00:00&enddt=2026-10-18T14:00:00&body=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`;
+      const outCalUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=${encodeURIComponent(title)}&startdt=2026-08-08T08:00:00&enddt=2026-08-09T14:00:00&body=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`;
       outlookBtn.href = outCalUrl;
     }
   }
@@ -705,9 +707,9 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Load existing wishes from LocalStorage or default pre-loaded mock list
     let wishes = JSON.parse(localStorage.getItem("wedding_wishes")) || [
-      { nama: "Bapak Lukman Prasetyo", kehadiran: "hadir", ucapan: "Selamat menempuh hidup baru Adrian & Clara! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. Maaf belum bisa hadir langsung karena masih di luar kota.", waktu: "2 jam yang lalu" },
-      { nama: "Nadia & Rian", kehadiran: "hadir", ucapan: "Happy wedding Clara & Adrian! Senang sekali melihat perjalanan cinta kalian berdua akhirnya bermuara di pelaminan. Cantik dan ganteng sekali hari ini! See you guys soon!", waktu: "3 jam yang lalu" },
-      { nama: "Alifia Zahra", kehadiran: "hadir", ucapan: "Selamat ya Clara sayangg! Lancar-lancar sampai hari H dan bahagia selamanya bareng suami! Amin yra 🤍", waktu: "5 jam yang lalu" }
+      { nama: "Bapak Lukman Prasetyo", kehadiran: "hadir", ucapan: "Selamat menempuh hidup baru Burhan & Fira! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. Maaf belum bisa hadir langsung karena masih di luar kota.", waktu: "2 jam yang lalu" },
+      { nama: "Nadia & Rian", kehadiran: "hadir", ucapan: "Happy wedding Fira & Burhan! Senang sekali melihat perjalanan cinta kalian berdua akhirnya bermuara di pelaminan. Cantik dan ganteng sekali hari ini! See you guys soon!", waktu: "3 jam yang lalu" },
+      { nama: "Alifia Zahra", kehadiran: "hadir", ucapan: "Selamat ya Fira sayangg! Lancar-lancar sampai hari H dan bahagia selamanya bareng suami! Amin yra 🤍", waktu: "5 jam yang lalu" }
     ];
 
     function renderWishes() {

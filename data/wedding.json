@@ -1,42 +1,42 @@
 {
   "mempelai": {
     "pria": {
-      "nama_lengkap": "Adrian Syahputra, S.T.",
-      "nama_panggilan": "Adrian",
-      "ayah": "Bapak Ir. H. Bambang Susilo",
-      "ibu": "Ibu Hj. Ratna Sari",
-      "instagram": "adrian.syah",
-      "foto": "images/groom.png"
+      "nama_lengkap": "Burhanudin Gunawan",
+      "nama_panggilan": "Burhan",
+      "ayah": "Supamiyanto",
+      "ibu": "Ibu Lilik Kirana Dewi",
+      "instagram": "",
+      "foto": "images/groom.jpg"
     },
     "wanita": {
-      "nama_lengkap": "Clara Anindya, M.Ds.",
-      "nama_panggilan": "Clara",
-      "ayah": "Bapak Dr. H. Lukman Hakim",
-      "ibu": "Ibu Hajah Sofia Amanda",
-      "instagram": "clara.anindya",
-      "foto": "images/bride.png"
+      "nama_lengkap": "Fira Alfiana Suhadi",
+      "nama_panggilan": "Fira",
+      "ayah": "Bapak Dede Suhadi",
+      "ibu": "",
+      "instagram": "",
+      "foto": "images/bride.jpg"
     }
   },
   "acara": {
     "akad": {
-      "hari": "Minggu",
-      "tanggal": "18 Oktober 2026",
+      "hari": "Sabtu",
+      "tanggal": "8 Agustus 2026",
       "jam": "08:00 - 10:00 WIB",
-      "tempat": "Masjid Raya Al-Bakrie",
-      "alamat": "Jl. Epicentrum Utama Raya, Kuningan, Jakarta Selatan",
-      "map_link": "https://maps.app.goo.gl/wK4p1wQf9X9z9Kxx9"
+      "tempat": "Indomaret Cendrawasih 74",
+      "alamat": "Jl. Cendrawasih Raya No.74, Sawah Lama, Kec. Ciputat, Kota Tangerang Selatan, Banten 15413",
+      "map_link": "https://www.google.com/maps/place/Indomaret+Cendrawasih+74/@-6.2931279,106.7329964,43a,75y,159.08h,80.43t/data=!3m5!1e1!3m3!1sCYqesNDPOyWEG-pSTAabEw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fpanoid%3DCYqesNDPOyWEG-pSTAabEw%26w%3D900%26h%3D600%26ll%3D-6.293128,106.732996%26yaw%3D159.084991%26pitch%3D9.574326%26thumbfov%3D98%26cb_client%3Dgmm.iv.ios!4m6!3m5!1s0x2e69f15bd0a224ef:0x8722c31febc4a0cc!8m2!3d-6.293173899999999!4d106.7328694!10e5?g_ep=CAISEjI2LjI1LjMuOTMyMTI1MTg3MBgAIIGBASpJLDk0Mjk3Njk5LDk0MjMxMTg8LDk0MjgwNTY4LDQ3MDcxNzA0LDk0MjE4NjQxLDk0MjgyMTM0LDEwMDgxMzQ2NCw5NDI4Njg2OUICSUQ%3D&skid=f8e45dad-a780-4294-9df4-94f6538a9738"
     },
     "resepsi": {
       "hari": "Minggu",
-      "tanggal": "18 Oktober 2026",
+      "tanggal": "9 Agustus 2026",
       "jam": "11:00 - 14:00 WIB",
-      "tempat": "The Glass House Ballroom",
-      "alamat": "Kuningan Place Tower B Lt. 3, Jl. Kuningan Mulia, Jakarta Selatan",
-      "map_link": "https://maps.app.goo.gl/wK4p1wQf9X9z9Kxx9"
+      "tempat": "Sawah Lama",
+      "alamat": "Sawah Lama, Kec. Ciputat, Kota Tangerang Selatan, Banten 15413",
+      "map_link": "https://www.google.com/maps/place/Sawah+Lama,+Kec.+Ciputat,+Kota+Tangerang+Selatan,+Banten+15413"
     }
   },
   "countdown": {
-    "target_date": "2026-10-18T08:00:00+07:00"
+    "target_date": "2026-08-08T08:00:00+07:00"
   },
   "love_story": [
     {
@@ -52,18 +52,18 @@
     {
       "tanggal": "Desember 2025",
       "judul": "Lamaran (Engagement)",
-      "deskripsi": "Di bawah langit sore yang cerah, di hadapan kedua keluarga besar, Adrian mengutarakan niat suci untuk meminang Clara. Hari yang penuh dengan tangis haru dan kebahagiaan."
+      "deskripsi": "Di bawah langit sore yang cerah, di hadapan kedua keluarga besar, Burhan mengutarakan niat suci untuk meminang Fira. Hari yang penuh dengan tangis haru dan kebahagiaan."
     },
     {
-      "tanggal": "18 Oktober 2026",
+      "tanggal": "8 Agustus 2026",
       "judul": "Hari Pernikahan",
       "deskripsi": "Hari di mana kami akan mengikat janji suci sehidup semati dalam ikatan pernikahan yang sah, mengukir lembaran baru dalam perjalanan hidup kami bersama."
     }
   ],
   "galeri": [
-    "images/gallery1.png",
-    "images/gallery2.png",
-    "images/gallery3.png"
+    "images/gallery1.jpg",
+    "images/gallery2.jpg",
+    "images/gallery3.jpg"
   ],
   "video": {
     "youtube_id": "dQw4w9WgXcQ"
@@ -73,29 +73,29 @@
       {
         "nama_bank": "BCA",
         "no_rekening": "1234567890",
-        "atas_nama": "Adrian Syahputra",
+        "atas_nama": "Burhanudin Gunawan",
         "logo_type": "bca"
       },
       {
         "nama_bank": "Bank Mandiri",
         "no_rekening": "0987654321123",
-        "atas_nama": "Clara Anindya",
+        "atas_nama": "Fira Alfiana Suhadi",
         "logo_type": "mandiri"
       }
     ],
-    "qris_text": "00020101021126360016ID1020304050607085204599953033605802ID5915Adrian and Clara6007Jakarta6105123456304ABCD"
+    "qris_text": "00020101021126360016ID1020304050607085204599953033605802ID5915Burhan and Fira6007Jakarta6105123456304ABCD"
   },
   "music": {
     "file_path": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
     "judul": "Beautiful In White - Shane Filan (Instrumental)"
   },
   "meta": {
-    "title": "Undangan Pernikahan Adrian & Clara",
-    "description": "Dengan penuh rasa syukur, kami mengundang Anda untuk menghadiri dan mendoakan pernikahan kami: Adrian Syahputra & Clara Anindya.",
-    "og_image": "images/cover.png"
+    "title": "Undangan Pernikahan Burhan & Fira",
+    "description": "Dengan penuh rasa syukur, kami mengundang Anda untuk menghadiri dan mendoakan pernikahan kami: Burhanudin Gunawan & Fira Alfiana Suhadi.",
+    "og_image": "images/cover.jpg"
   },
   "ayat": {
-    "teks_ar": "وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةً ۗ اِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ",
+    "teks_ar": "وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةً ۗ اِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ",
     "teks_id": "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berfikir.",
     "sumber": "Q.S. Ar-Rum: 21"
   }

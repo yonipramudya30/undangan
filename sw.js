@@ -1,16 +1,16 @@
-const CACHE_NAME = 'wedding-invitation-cache-v2';
+const CACHE_NAME = 'wedding-invitation-cache-v3';
 const ASSETS = [
   '/',
   '/index.html',
   '/css/style.css',
   '/js/app.js',
   '/data/wedding.json',
-  '/images/cover.png',
-  '/images/groom.png',
-  '/images/bride.png',
-  '/images/gallery1.png',
-  '/images/gallery2.png',
-  '/images/gallery3.png',
+  '/images/cover.jpg',
+  '/images/groom.jpg',
+  '/images/bride.jpg',
+  '/images/gallery1.jpg',
+  '/images/gallery2.jpg',
+  '/images/gallery3.jpg',
   '/manifest.json'
 ];
 
