@@ -12,7 +12,7 @@
 
   <!-- PWA & Mobile Optimization -->
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#D4AF37">
+  <meta name="theme-color" content="#1A1A17">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -44,18 +44,25 @@
       theme: {
         extend: {
           colors: {
-            gold: {
-              light: '#F3E5AB',
-              DEFAULT: '#D4AF37',
-              dark: '#AA7C11',
-              soft: '#E5C158',
+            'bw': {
+              50:  '#F9F9F7',
+              100: '#EDEDE9',
+              200: '#D9D9D3',
+              300: '#C2C2BA',
+              400: '#9A9A90',
+              500: '#72726A',
+              600: '#4F4F47',
+              700: '#3A3A33',
+              800: '#242420',
+              900: '#1A1A17',
+              950: '#0D0D0B',
             },
-            ivory: '#FDFBF7',
-            cream: '#FAF6EE',
+            'ivory': '#F9F9F7',
+            'cream': '#F4F3F0',
           },
           fontFamily: {
             title: ['Cormorant Garamond', 'serif'],
-            body: ['Inter', 'sans-serif'],
+            body:  ['Inter', 'sans-serif'],
           }
         }
       }
@@ -66,7 +73,7 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="bg-ivory text-stone-800 antialiased selection:bg-gold/20 selection:text-gold-dark">
+<body class="bg-ivory text-bw-900 antialiased selection:bg-bw-900/10 selection:text-bw-900">
 
   <!-- Scroll Progress Bar -->
   <div id="scroll-progress"></div>
@@ -79,58 +86,97 @@
   <canvas id="petals-canvas"></canvas>
 
   <!-- 1. LOADING SCREEN -->
-  <div id="loading-screen" class="fixed inset-0 bg-cream z-[99999] flex flex-col justify-center items-center">
+  <div id="loading-screen" class="fixed inset-0 z-[99999] flex flex-col justify-center items-center" style="background:#F9F9F7;">
     <div class="flex flex-col items-center">
-      <!-- Animated Gold Monogram -->
-      <div class="relative w-24 h-24 mb-6 flex items-center justify-center border border-gold/30 rounded-full">
-        <span class="font-title text-4xl text-gold font-light tracking-widest animate-pulse">B & F</span>
-        <div class="absolute inset-0 border-2 border-gold/10 border-t-gold rounded-full animate-spin"></div>
+      <!-- Animated Monogram -->
+      <div class="relative w-24 h-24 mb-6 flex items-center justify-center border border-bw-300 rounded-full">
+        <span class="font-title text-4xl text-bw-900 font-light tracking-widest animate-pulse">B & F</span>
+        <div class="absolute inset-0 border-2 border-bw-200 border-t-bw-700 rounded-full animate-spin"></div>
       </div>
-      <h2 class="font-title text-2xl tracking-widest text-stone-700 font-light mb-1">Burhan & Fira</h2>
-      <p class="text-[10px] uppercase tracking-[0.25em] text-stone-400">Loading Invitation...</p>
+      <h2 class="font-title text-2xl tracking-widest text-bw-700 font-light mb-1">Burhan & Fira</h2>
+      <p class="text-[10px] uppercase tracking-[0.25em] text-bw-400">Loading Invitation...</p>
     </div>
   </div>
 
   <!-- 2. COVER PAGE (FULL SCREEN OVERLAY) -->
-  <div id="cover-screen" class="fixed inset-0 z-[9999] overflow-hidden flex items-center justify-center bg-stone-950">
+  <div id="cover-screen" class="fixed inset-0 z-[9999] overflow-hidden flex items-center justify-center bg-bw-950">
     <!-- Slow zoom prewedding photo background -->
     <div class="absolute inset-0 overflow-hidden lazy-svg-wrapper">
-      <img id="cover-img" src="images/cover.jpg" data-src-svg="images/cover.svg" alt="Prewedding Fira &amp; Burhan"
-        class="w-full h-full object-cover zoom-in-bg opacity-40 filter brightness-90 lazy-svg">
+      <img id="cover-img" src="images/cover.jpg" data-src-svg="images/cover.svg" alt="Prewedding Fira & Burhan"
+        class="w-full h-full object-cover zoom-in-bg opacity-35 filter brightness-75 grayscale lazy-svg">
     </div>
 
     <!-- Dark gradient overlay -->
-    <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-900/60 to-stone-950/80"></div>
+    <div class="absolute inset-0 cover-gradient"></div>
+
+    <!-- Floral corner decorations on cover -->
+    <div class="absolute top-4 left-4 w-32 h-32 opacity-25 pointer-events-none">
+      <svg viewBox="0 0 120 120" class="w-full h-full">
+        <path d="M5,5 Q20,30 40,40 Q60,50 80,80 Q90,95 110,110" stroke="white" stroke-width="0.6" fill="none" stroke-linecap="round"/>
+        <path d="M5,30 Q25,15 40,5" stroke="white" stroke-width="0.6" fill="none" stroke-linecap="round"/>
+        <path d="M30,5 Q15,25 5,40" stroke="white" stroke-width="0.5" fill="none" stroke-linecap="round"/>
+        <circle cx="40" cy="5" r="1.5" fill="white" opacity="0.6"/>
+        <circle cx="5" cy="40" r="1.5" fill="white" opacity="0.6"/>
+        <circle cx="80" cy="80" r="2" fill="white" opacity="0.4"/>
+        <!-- Flower petals at corner -->
+        <ellipse cx="12" cy="12" rx="4" ry="2" fill="white" opacity="0.15" transform="rotate(45 12 12)"/>
+        <ellipse cx="12" cy="12" rx="4" ry="2" fill="white" opacity="0.15" transform="rotate(0 12 12)"/>
+        <circle cx="12" cy="12" r="1.5" fill="white" opacity="0.3"/>
+      </svg>
+    </div>
+    <div class="absolute bottom-4 right-4 w-32 h-32 opacity-25 pointer-events-none" style="transform:rotate(180deg)">
+      <svg viewBox="0 0 120 120" class="w-full h-full">
+        <path d="M5,5 Q20,30 40,40 Q60,50 80,80 Q90,95 110,110" stroke="white" stroke-width="0.6" fill="none" stroke-linecap="round"/>
+        <path d="M5,30 Q25,15 40,5" stroke="white" stroke-width="0.6" fill="none" stroke-linecap="round"/>
+        <path d="M30,5 Q15,25 5,40" stroke="white" stroke-width="0.5" fill="none" stroke-linecap="round"/>
+        <circle cx="40" cy="5" r="1.5" fill="white" opacity="0.6"/>
+        <circle cx="5" cy="40" r="1.5" fill="white" opacity="0.6"/>
+      </svg>
+    </div>
 
     <!-- Content container -->
     <div class="relative z-10 text-center px-4 max-w-lg flex flex-col items-center text-white">
-      <span class="text-xs uppercase tracking-[0.3em] text-gold-light mb-4 font-light">WEDDING INVITATION</span>
+      <span class="text-xs uppercase tracking-[0.35em] text-bw-300 mb-5 font-light">WEDDING INVITATION</span>
 
       <!-- Monogram -->
       <h1 class="font-title text-5xl md:text-7xl font-light tracking-wide mb-3 text-white">
         <span id="cover-pria-nama">Burhan</span>
-        <span class="font-title text-3xl md:text-4xl text-gold mx-4">&</span>
+        <span class="font-title text-3xl md:text-4xl text-bw-300 mx-4">&</span>
         <span id="cover-wanita-nama">Fira</span>
       </h1>
+
+      <!-- Floral thin divider -->
+      <div class="flex items-center gap-3 mb-5 mt-1 w-full max-w-xs">
+        <div class="flex-1 h-px bg-white/20"></div>
+        <svg viewBox="0 0 40 12" class="w-10 h-3" fill="none">
+          <ellipse cx="8" cy="6" rx="4" ry="3" stroke="white" stroke-width="0.8" opacity="0.5"/>
+          <ellipse cx="20" cy="6" rx="5" ry="3.5" stroke="white" stroke-width="0.8" opacity="0.7"/>
+          <ellipse cx="32" cy="6" rx="4" ry="3" stroke="white" stroke-width="0.8" opacity="0.5"/>
+          <circle cx="8" cy="6" r="1" fill="white" opacity="0.4"/>
+          <circle cx="20" cy="6" r="1.2" fill="white" opacity="0.5"/>
+          <circle cx="32" cy="6" r="1" fill="white" opacity="0.4"/>
+        </svg>
+        <div class="flex-1 h-px bg-white/20"></div>
+      </div>
+
       <!-- Wedding Date -->
-      <p class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-stone-400 mb-8 aos-init" data-aos="fade-up"
-        data-aos-delay="600">
+      <p class="text-[10px] md:text-xs uppercase tracking-[0.3em] text-bw-400 mb-8">
         <span id="cover-wedding-date">8 Agustus 2026</span>
       </p>
 
       <!-- Guest Box -->
       <div
-        class="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 mt-6 mb-8 w-full max-w-sm shadow-2xl">
-        <p class="text-[10px] tracking-[0.2em] text-stone-200 uppercase mb-2">Kepada Yth. Bapak/Ibu/Saudara/i</p>
-        <h3 class="guest-name-placeholder font-title text-2xl text-gold-light font-medium tracking-wide my-2 truncate">
+        class="bg-black/50 backdrop-blur-md border border-white/10 rounded-2xl p-6 mt-2 mb-8 w-full max-w-sm shadow-2xl">
+        <p class="text-[10px] tracking-[0.2em] text-bw-300 uppercase mb-2">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+        <h3 class="guest-name-placeholder font-title text-2xl text-white font-medium tracking-wide my-2 truncate">
           Nama Tamu</h3>
-        <p class="text-[10px] text-stone-300 font-light mt-2 italic leading-relaxed">Kami meminta maaf bila ada
+        <p class="text-[10px] text-bw-400 font-light mt-2 italic leading-relaxed">Kami meminta maaf bila ada
           kesalahan penulisan nama/gelar</p>
       </div>
 
       <!-- Enter Button -->
       <button id="btn-buka-undangan"
-        class="btn-magnetic ripple-btn bg-gold-gradient hover:bg-gold-light text-stone-950 px-8 py-3.5 rounded-full font-medium tracking-wider text-xs uppercase shadow-xl transition-all duration-300 hover:shadow-gold/20 flex items-center gap-2">
+        class="btn-magnetic ripple-btn bg-white hover:bg-bw-100 text-bw-900 px-8 py-3.5 rounded-full font-semibold tracking-wider text-xs uppercase shadow-2xl transition-all duration-300 flex items-center gap-2">
         <i class="far fa-envelope-open text-sm"></i>
         <span>Buka Undangan</span>
       </button>
@@ -142,37 +188,37 @@
     class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-2xl glass-nav rounded-full px-6 py-4 shadow-xl flex items-center justify-between transition-all duration-500 translate-y-40">
     <div class="flex items-center justify-around w-full text-[10px] tracking-wider uppercase font-medium">
       <a href="#home"
-        class="nav-link text-gold font-semibold transition-colors duration-300 flex flex-col items-center gap-1">
+        class="nav-link text-bw-900 font-semibold transition-colors duration-300 flex flex-col items-center gap-1">
         <i class="fas fa-home text-sm md:hidden"></i>
         <span class="hidden md:inline">Beranda</span>
       </a>
       <a href="#mempelai"
-        class="nav-link text-stone-500 hover:text-gold transition-colors duration-300 flex flex-col items-center gap-1">
+        class="nav-link text-bw-400 hover:text-bw-900 transition-colors duration-300 flex flex-col items-center gap-1">
         <i class="fas fa-user-friends text-sm md:hidden"></i>
         <span class="hidden md:inline">Mempelai</span>
       </a>
       <a href="#story"
-        class="nav-link text-stone-500 hover:text-gold transition-colors duration-300 flex flex-col items-center gap-1">
+        class="nav-link text-bw-400 hover:text-bw-900 transition-colors duration-300 flex flex-col items-center gap-1">
         <i class="fas fa-heart text-sm md:hidden"></i>
         <span class="hidden md:inline">Kisah</span>
       </a>
       <a href="#acara"
-        class="nav-link text-stone-500 hover:text-gold transition-colors duration-300 flex flex-col items-center gap-1">
+        class="nav-link text-bw-400 hover:text-bw-900 transition-colors duration-300 flex flex-col items-center gap-1">
         <i class="fas fa-calendar-alt text-sm md:hidden"></i>
         <span class="hidden md:inline">Acara</span>
       </a>
       <a href="#gallery"
-        class="nav-link text-stone-500 hover:text-gold transition-colors duration-300 flex flex-col items-center gap-1">
+        class="nav-link text-bw-400 hover:text-bw-900 transition-colors duration-300 flex flex-col items-center gap-1">
         <i class="fas fa-images text-sm md:hidden"></i>
         <span class="hidden md:inline">Galeri</span>
       </a>
       <a href="#rsvp"
-        class="nav-link text-stone-500 hover:text-gold transition-colors duration-300 flex flex-col items-center gap-1">
+        class="nav-link text-bw-400 hover:text-bw-900 transition-colors duration-300 flex flex-col items-center gap-1">
         <i class="fas fa-paper-plane text-sm md:hidden"></i>
         <span class="hidden md:inline">RSVP</span>
       </a>
       <a href="#envelope"
-        class="nav-link text-stone-500 hover:text-gold transition-colors duration-300 flex flex-col items-center gap-1">
+        class="nav-link text-bw-400 hover:text-bw-900 transition-colors duration-300 flex flex-col items-center gap-1">
         <i class="fas fa-gift text-sm md:hidden"></i>
         <span class="hidden md:inline">Hadiah</span>
       </a>
@@ -180,81 +226,131 @@
   </nav>
 
   <!-- 4. HERO SECTION (BERANDA) -->
-  <section id="home" class="min-h-screen relative flex items-center justify-center overflow-hidden py-24 px-4 bg-cream">
-    <!-- Clean Minimalist Background Art -->
-    <div class="absolute inset-0 opacity-40 mix-blend-overlay">
-      <div class="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-gold/10 filter blur-3xl"></div>
-      <div class="absolute -bottom-40 -right-40 w-96 h-96 rounded-full bg-gold/10 filter blur-3xl"></div>
-    </div>
+  <section id="home" class="min-h-screen relative flex items-center justify-center overflow-hidden py-24 px-4 floral-corner-tl floral-corner-br" style="background: var(--off-white);">
+    <!-- Subtle background floral pattern -->
+    <div class="absolute inset-0 pointer-events-none opacity-[0.04]" style="background-image: url(\"data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%231A1A17' fill-opacity='1'%3E%3Cellipse cx='10' cy='10' rx='5' ry='3' transform='rotate(30 10 10)'/%3E%3Cellipse cx='70' cy='70' rx='5' ry='3' transform='rotate(-30 70 70)'/%3E%3Ccircle cx='40' cy='40' r='2'/%3E%3C/g%3E%3C/svg%3E\"); background-size: 80px 80px;"></div>
 
-    <!-- Top left corner floating floral decoration -->
-    <div class="absolute top-8 left-8 w-24 h-24 md:w-36 md:h-36 floating-floral">
-      <svg viewBox="0 0 100 100" class="floral-svg w-full h-full">
-        <path d="M10,10 Q30,40 50,50 Q70,60 90,90 M30,30 Q60,20 70,10 M50,50 Q80,40 90,30" />
-        <circle cx="70" cy="10" r="2" fill="#D4AF37" />
-        <circle cx="90" cy="30" r="2" fill="#D4AF37" />
+    <!-- Floating floral corners -->
+    <div class="absolute top-8 left-8 w-28 h-28 md:w-40 md:h-40 floating-floral">
+      <svg viewBox="0 0 120 120" class="w-full h-full floral-svg">
+        <path d="M10,10 Q30,40 55,55 Q75,65 105,105"/>
+        <path d="M10,35 Q30,20 45,10"/>
+        <path d="M35,10 Q20,30 10,45"/>
+        <!-- Rose-like flower -->
+        <ellipse cx="55" cy="55" rx="8" ry="5" stroke-width="0.6" transform="rotate(45 55 55)"/>
+        <ellipse cx="55" cy="55" rx="8" ry="5" stroke-width="0.6" transform="rotate(0 55 55)"/>
+        <ellipse cx="55" cy="55" rx="8" ry="5" stroke-width="0.6" transform="rotate(-45 55 55)"/>
+        <circle cx="55" cy="55" r="3" fill="rgba(58,58,51,0.15)"/>
+        <!-- Small flowers along branch -->
+        <ellipse cx="30" cy="32" rx="4" ry="2.5" stroke-width="0.5" transform="rotate(30 30 32)"/>
+        <ellipse cx="30" cy="32" rx="4" ry="2.5" stroke-width="0.5" transform="rotate(75 30 32)"/>
+        <circle cx="30" cy="32" r="1.5" fill="rgba(58,58,51,0.12)"/>
+        <!-- Leaves -->
+        <path d="M40,20 Q50,10 60,15 Q55,25 40,20 Z" stroke-width="0.5"/>
+        <path d="M25,50 Q15,40 18,30 Q28,38 25,50 Z" stroke-width="0.5"/>
+        <!-- Tiny dots (pollen) -->
+        <circle cx="70" cy="10" r="1.2" fill="rgba(58,58,51,0.2)"/>
+        <circle cx="85" cy="18" r="0.8" fill="rgba(58,58,51,0.15)"/>
+        <circle cx="105" cy="25" r="1" fill="rgba(58,58,51,0.18)"/>
       </svg>
     </div>
 
-    <!-- Bottom right corner floating floral decoration -->
-    <div class="absolute bottom-8 right-8 w-24 h-24 md:w-36 md:h-36 floating-floral-delayed">
-      <svg viewBox="0 0 100 100" class="floral-svg w-full h-full" style="transform: rotate(180deg)">
-        <path d="M10,10 Q30,40 50,50 Q70,60 90,90 M30,30 Q60,20 70,10 M50,50 Q80,40 90,30" />
-        <circle cx="70" cy="10" r="2" fill="#D4AF37" />
-        <circle cx="90" cy="30" r="2" fill="#D4AF37" />
+    <div class="absolute bottom-8 right-8 w-28 h-28 md:w-40 md:h-40 floating-floral-delayed">
+      <svg viewBox="0 0 120 120" class="w-full h-full floral-svg" style="transform: rotate(180deg)">
+        <path d="M10,10 Q30,40 55,55 Q75,65 105,105"/>
+        <path d="M10,35 Q30,20 45,10"/>
+        <path d="M35,10 Q20,30 10,45"/>
+        <ellipse cx="55" cy="55" rx="8" ry="5" stroke-width="0.6" transform="rotate(45 55 55)"/>
+        <ellipse cx="55" cy="55" rx="8" ry="5" stroke-width="0.6" transform="rotate(0 55 55)"/>
+        <ellipse cx="55" cy="55" rx="8" ry="5" stroke-width="0.6" transform="rotate(-45 55 55)"/>
+        <circle cx="55" cy="55" r="3" fill="rgba(58,58,51,0.15)"/>
+        <ellipse cx="30" cy="32" rx="4" ry="2.5" stroke-width="0.5" transform="rotate(30 30 32)"/>
+        <ellipse cx="30" cy="32" rx="4" ry="2.5" stroke-width="0.5" transform="rotate(75 30 32)"/>
+        <circle cx="30" cy="32" r="1.5" fill="rgba(58,58,51,0.12)"/>
+        <path d="M40,20 Q50,10 60,15 Q55,25 40,20 Z" stroke-width="0.5"/>
+        <path d="M25,50 Q15,40 18,30 Q28,38 25,50 Z" stroke-width="0.5"/>
+        <circle cx="70" cy="10" r="1.2" fill="rgba(58,58,51,0.2)"/>
+        <circle cx="85" cy="18" r="0.8" fill="rgba(58,58,51,0.15)"/>
       </svg>
     </div>
 
     <div class="relative z-10 text-center max-w-3xl px-4 flex flex-col items-center">
-      <span id="hero-subtitle" class="text-xs tracking-[0.4em] uppercase text-stone-400 font-light mb-6 block">THE
+      <span id="hero-subtitle" class="text-xs tracking-[0.4em] uppercase text-bw-400 font-light mb-6 block">THE
         WEDDING OF</span>
 
-      <!-- Decorative gold ornament -->
-      <div id="hero-quote-ornament" class="w-16 h-[1px] bg-gold mb-8 relative">
-        <i class="fas fa-heart text-[8px] text-gold absolute -top-[4px] left-1/2 -translate-x-1/2 bg-cream px-2"></i>
+      <!-- Decorative ornament with flower -->
+      <div id="hero-quote-ornament" class="flex items-center gap-3 mb-8 w-48">
+        <div class="flex-1 h-px bg-bw-300"></div>
+        <svg viewBox="0 0 20 20" class="w-4 h-4" fill="none">
+          <path d="M10,2 C10,2 8,6 5,7 C8,8 10,12 10,12 C10,12 12,8 15,7 C12,6 10,2 10,2Z" stroke="#3A3A33" stroke-width="0.8" fill="rgba(58,58,51,0.1)"/>
+          <circle cx="10" cy="7" r="1.5" fill="rgba(58,58,51,0.25)"/>
+        </svg>
+        <div class="flex-1 h-px bg-bw-300"></div>
       </div>
 
       <!-- Main Heading names -->
       <h2 id="hero-title-group"
-        class="font-title text-6xl md:text-8xl font-light tracking-wide text-stone-800 leading-tight mb-8">
+        class="font-title text-6xl md:text-8xl font-light tracking-wide text-bw-900 leading-tight mb-8">
         <span id="hero-pria-nama" class="block md:inline">Burhan</span>
-        <span class="text-gold font-normal my-2 md:my-0 md:mx-6">&</span>
+        <span class="text-bw-400 font-light my-2 md:my-0 md:mx-6">&</span>
         <span id="hero-wanita-nama" class="block md:inline">Fira</span>
       </h2>
 
       <p id="hero-date"
-        class="text-xs uppercase tracking-[0.35em] text-stone-500 font-light border-y border-stone-200/80 py-3 px-8 mb-12">
+        class="text-xs uppercase tracking-[0.35em] text-bw-500 font-light border-y border-bw-200 py-3 px-8 mb-12">
         Sabtu, 8 Agustus 2026
       </p>
 
       <!-- Scroll Indicator -->
-      <div class="animate-bounce mt-4 cursor-pointer text-gold hover:text-gold-dark transition-colors duration-300"
+      <div class="animate-bounce mt-4 cursor-pointer text-bw-500 hover:text-bw-900 transition-colors duration-300"
         onclick="document.getElementById('ayat').scrollIntoView({behavior: 'smooth'})">
-        <p class="text-[9px] uppercase tracking-[0.25em] text-stone-400 mb-2">Scroll Kebawah</p>
+        <p class="text-[9px] uppercase tracking-[0.25em] text-bw-400 mb-2">Scroll Kebawah</p>
         <i class="fas fa-chevron-down text-sm"></i>
       </div>
     </div>
   </section>
 
   <!-- 5. AYAT / KUTIPAN PERNIKAHAN -->
-  <section id="ayat" class="py-24 px-4 bg-ivory relative overflow-hidden">
+  <section id="ayat" class="py-24 px-4 relative overflow-hidden floral-vine-left floral-vine-right" style="background: var(--warm-white);">
+    <!-- Floral right side decoration -->
+    <div class="absolute right-0 top-1/2 -translate-y-1/2 w-32 h-64 opacity-10 pointer-events-none">
+      <svg viewBox="0 0 60 120" class="w-full h-full floral-svg">
+        <path d="M55,5 Q40,30 30,60 Q20,90 10,115"/>
+        <ellipse cx="30" cy="60" rx="10" ry="6" transform="rotate(30 30 60)"/>
+        <ellipse cx="30" cy="60" rx="10" ry="6" transform="rotate(-30 30 60)"/>
+        <path d="M30,35 Q45,25 50,15 Q40,28 30,35 Z"/>
+        <path d="M25,85 Q10,80 5,70 Q18,78 25,85 Z"/>
+        <circle cx="30" cy="60" r="3" fill="rgba(58,58,51,0.3)"/>
+      </svg>
+    </div>
+    <div class="absolute left-0 top-1/2 -translate-y-1/2 w-32 h-64 opacity-10 pointer-events-none" style="transform: translateY(-50%) scaleX(-1);">
+      <svg viewBox="0 0 60 120" class="w-full h-full floral-svg">
+        <path d="M55,5 Q40,30 30,60 Q20,90 10,115"/>
+        <ellipse cx="30" cy="60" rx="10" ry="6" transform="rotate(30 30 60)"/>
+        <ellipse cx="30" cy="60" rx="10" ry="6" transform="rotate(-30 30 60)"/>
+        <path d="M30,35 Q45,25 50,15 Q40,28 30,35 Z"/>
+        <path d="M25,85 Q10,80 5,70 Q18,78 25,85 Z"/>
+        <circle cx="30" cy="60" r="3" fill="rgba(58,58,51,0.3)"/>
+      </svg>
+    </div>
+
     <div class="max-w-4xl mx-auto text-center px-4 relative z-10">
-      <!-- Top mini heart -->
-      <div class="text-gold mb-6" data-aos="fade-up">
-        <i class="fas fa-quote-right text-3xl opacity-20"></i>
+      <!-- Top quote mark -->
+      <div class="text-bw-200 mb-6" data-aos="fade-up">
+        <i class="fas fa-quote-right text-3xl opacity-60"></i>
       </div>
 
       <!-- Arabic verse -->
       <p id="ayat-teks-ar"
-        class="font-title text-2xl md:text-3xl leading-loose text-stone-700 mb-8 px-2 select-all font-light" dir="rtl"
+        class="font-title text-2xl md:text-3xl leading-loose text-bw-700 mb-8 px-2 select-all font-light" dir="rtl"
         data-aos="fade-up" data-aos-delay="100">
         وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ
-        مَّوَدَّةً وَّرَحْمَةً ۗ اِنَّ فِيْ ذٰلِكَ لَاٰيٰtِ لِّقَوْمٍ يَّتَفَكَّرُوْنَ
+        مَّوَدَّةً وَّرَحْمَةً ۗ اِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ
       </p>
 
       <!-- Indonesian Translation -->
       <p id="ayat-teks-id"
-        class="text-sm md:text-base leading-relaxed text-stone-500 font-light max-w-2xl mx-auto mb-6 px-4 italic"
+        class="text-sm md:text-base leading-relaxed text-bw-500 font-light max-w-2xl mx-auto mb-6 px-4 italic"
         data-aos="fade-up" data-aos-delay="200">
         "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri,
         supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang.
@@ -262,7 +358,7 @@
       </p>
 
       <!-- Source -->
-      <span id="ayat-sumber" class="text-xs uppercase tracking-widest text-gold font-medium block" data-aos="fade-up"
+      <span id="ayat-sumber" class="text-xs uppercase tracking-widest text-bw-600 font-medium block" data-aos="fade-up"
         data-aos-delay="300">
         Q.S. Ar-Rum: 21
       </span>
@@ -270,14 +366,34 @@
   </section>
 
   <!-- 6. PROFIL MEMPELAI -->
-  <section id="mempelai" class="py-32 px-4 bg-cream relative overflow-hidden">
-    <div class="max-w-6xl mx-auto relative z-10">
+  <section id="mempelai" class="py-32 px-4 relative overflow-hidden floral-bg-light floral-corner-tl floral-corner-br" style="background: var(--off-white);">
+    <!-- Large background floral -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.025]">
+      <svg viewBox="0 0 400 400" class="w-full max-w-2xl h-auto">
+        <ellipse cx="200" cy="200" rx="80" ry="50" stroke="#1A1A17" stroke-width="1" fill="none" transform="rotate(0 200 200)"/>
+        <ellipse cx="200" cy="200" rx="80" ry="50" stroke="#1A1A17" stroke-width="1" fill="none" transform="rotate(45 200 200)"/>
+        <ellipse cx="200" cy="200" rx="80" ry="50" stroke="#1A1A17" stroke-width="1" fill="none" transform="rotate(90 200 200)"/>
+        <ellipse cx="200" cy="200" rx="80" ry="50" stroke="#1A1A17" stroke-width="1" fill="none" transform="rotate(135 200 200)"/>
+        <circle cx="200" cy="200" r="15" stroke="#1A1A17" stroke-width="1.5" fill="none"/>
+        <circle cx="200" cy="200" r="5" fill="#1A1A17"/>
+      </svg>
+    </div>
 
+    <div class="max-w-6xl mx-auto relative z-10">
       <!-- Section Header -->
       <div class="text-center mb-24" data-aos="fade-up">
-        <span class="text-xs uppercase tracking-[0.3em] text-stone-400 font-light block mb-3">KEDUA MEMPELAI</span>
-        <h2 class="font-title text-4xl md:text-5xl font-light text-stone-800 tracking-wide">Mempelai Pria & Wanita</h2>
-        <div class="w-12 h-[1px] bg-gold mx-auto mt-6"></div>
+        <span class="text-xs uppercase tracking-[0.3em] text-bw-400 font-light block mb-3">KEDUA MEMPELAI</span>
+        <h2 class="font-title text-4xl md:text-5xl font-light text-bw-900 tracking-wide">Mempelai Pria & Wanita</h2>
+        <div class="section-header-floral mt-6">
+          <div class="line"></div>
+          <svg viewBox="0 0 28 28" width="22" height="22" fill="none">
+            <ellipse cx="14" cy="14" rx="7" ry="4.5" stroke="#3A3A33" stroke-width="0.8" transform="rotate(0 14 14)"/>
+            <ellipse cx="14" cy="14" rx="7" ry="4.5" stroke="#3A3A33" stroke-width="0.8" transform="rotate(60 14 14)"/>
+            <ellipse cx="14" cy="14" rx="7" ry="4.5" stroke="#3A3A33" stroke-width="0.8" transform="rotate(120 14 14)"/>
+            <circle cx="14" cy="14" r="2" fill="rgba(58,58,51,0.2)"/>
+          </svg>
+          <div class="line line-r"></div>
+        </div>
       </div>
 
       <!-- Symmetrical Grid -->
@@ -287,18 +403,18 @@
         <div class="flex flex-col items-center text-center px-4" data-aos="fade-right">
           <!-- Profile image container -->
           <div
-            class="relative w-64 h-64 md:w-72 md:h-72 rounded-full p-2 border border-gold/30 shadow-lg mb-8 group overflow-hidden bg-white lazy-svg-wrapper">
-            <img id="groom-img" src="images/groom.jpg" alt="Adrian Syahputra"
-              class="w-full h-full object-cover rounded-full transition-transform duration-700 ease-out group-hover:scale-105 lazy-svg" />
+            class="relative w-64 h-64 md:w-72 md:h-72 rounded-full p-2 profile-ring shadow-lg mb-8 group overflow-hidden bg-white lazy-svg-wrapper">
+            <img id="groom-img" src="images/groom.jpg" alt="Burhanudin Gunawan"
+              class="w-full h-full object-cover rounded-full transition-transform duration-700 ease-out group-hover:scale-105 lazy-svg grayscale hover:grayscale-0" />
           </div>
 
-          <h3 id="groom-fullname" class="font-title text-3xl font-light tracking-wide text-stone-800 mb-2">Burhanudin Gunawan</h3>
-          <p id="groom-parents" class="text-xs text-stone-500 font-light max-w-sm mb-6 leading-relaxed">Putra dari Supamiyanto & Ibu Lilik Kirana Dewi</p>
+          <h3 id="groom-fullname" class="font-title text-3xl font-light tracking-wide text-bw-900 mb-2">Burhanudin Gunawan</h3>
+          <p id="groom-parents" class="text-xs text-bw-500 font-light max-w-sm mb-6 leading-relaxed">Putra dari Supamiyanto & Ibu Lilik Kirana Dewi</p>
 
           <!-- IG Link -->
           <a id="groom-instagram" href="" target="_blank"
-            class="btn-magnetic inline-flex items-center text-xs tracking-wider uppercase text-gold hover:text-gold-dark transition-colors duration-300 font-medium px-4 py-2 border border-gold/20 rounded-full hover:bg-gold/5">
-            <i class="fab fa-instagram mr-2"></i>@adrian.syah
+            class="btn-magnetic inline-flex items-center text-xs tracking-wider uppercase text-bw-700 hover:text-bw-900 transition-colors duration-300 font-medium px-4 py-2 border border-bw-300 rounded-full hover:bg-bw-100">
+            <i class="fab fa-instagram mr-2"></i>@burhan
           </a>
         </div>
 
@@ -306,18 +422,18 @@
         <div class="flex flex-col items-center text-center px-4" data-aos="fade-left">
           <!-- Profile image container -->
           <div
-            class="relative w-64 h-64 md:w-72 md:h-72 rounded-full p-2 border border-gold/30 shadow-lg mb-8 group overflow-hidden bg-white lazy-svg-wrapper">
-            <img id="bride-img" src="images/bride.jpg" alt="Clara Anindya"
-              class="w-full h-full object-cover rounded-full transition-transform duration-700 ease-out group-hover:scale-105 lazy-svg" />
+            class="relative w-64 h-64 md:w-72 md:h-72 rounded-full p-2 profile-ring shadow-lg mb-8 group overflow-hidden bg-white lazy-svg-wrapper">
+            <img id="bride-img" src="images/bride.jpg" alt="Fira Alfiana Suhadi"
+              class="w-full h-full object-cover rounded-full transition-transform duration-700 ease-out group-hover:scale-105 lazy-svg grayscale hover:grayscale-0" />
           </div>
 
-          <h3 id="bride-fullname" class="font-title text-3xl font-light tracking-wide text-stone-800 mb-2">Fira Alfiana Suhadi</h3>
-          <p id="bride-parents" class="text-xs text-stone-500 font-light max-w-sm mb-6 leading-relaxed">Putri dari Bapak Dede Suhadi</p>
+          <h3 id="bride-fullname" class="font-title text-3xl font-light tracking-wide text-bw-900 mb-2">Fira Alfiana Suhadi</h3>
+          <p id="bride-parents" class="text-xs text-bw-500 font-light max-w-sm mb-6 leading-relaxed">Putri dari Bapak Dede Suhadi</p>
 
           <!-- IG Link -->
           <a id="bride-instagram" href="" target="_blank"
-            class="btn-magnetic inline-flex items-center text-xs tracking-wider uppercase text-gold hover:text-gold-dark transition-colors duration-300 font-medium px-4 py-2 border border-gold/20 rounded-full hover:bg-gold/5">
-            <i class="fab fa-instagram mr-2"></i>@clara.anindya
+            class="btn-magnetic inline-flex items-center text-xs tracking-wider uppercase text-bw-700 hover:text-bw-900 transition-colors duration-300 font-medium px-4 py-2 border border-bw-300 rounded-full hover:bg-bw-100">
+            <i class="fab fa-instagram mr-2"></i>@fira
           </a>
         </div>
 
@@ -326,47 +442,82 @@
   </section>
 
   <!-- 7. COUNTDOWN REALTIME -->
-  <section class="py-24 px-4 bg-gradient-to-b from-cream to-ivory relative overflow-hidden">
+  <section class="py-24 px-4 relative overflow-hidden floral-corner-tl-white floral-corner-br-white" style="background: var(--black-soft);">
+    <!-- Floral overlay on dark bg -->
+    <div class="absolute inset-0 pointer-events-none opacity-5">
+      <svg viewBox="0 0 400 200" class="w-full h-full" preserveAspectRatio="xMidYMid slice">
+        <ellipse cx="50" cy="100" rx="40" ry="25" stroke="white" stroke-width="0.8" fill="none" transform="rotate(30 50 100)"/>
+        <ellipse cx="50" cy="100" rx="40" ry="25" stroke="white" stroke-width="0.8" fill="none" transform="rotate(-30 50 100)"/>
+        <circle cx="50" cy="100" r="6" stroke="white" stroke-width="1" fill="none"/>
+        <ellipse cx="350" cy="100" rx="40" ry="25" stroke="white" stroke-width="0.8" fill="none" transform="rotate(30 350 100)"/>
+        <ellipse cx="350" cy="100" rx="40" ry="25" stroke="white" stroke-width="0.8" fill="none" transform="rotate(-30 350 100)"/>
+        <circle cx="350" cy="100" r="6" stroke="white" stroke-width="1" fill="none"/>
+        <ellipse cx="200" cy="40" rx="30" ry="18" stroke="white" stroke-width="0.8" fill="none" transform="rotate(0 200 40)"/>
+        <ellipse cx="200" cy="160" rx="30" ry="18" stroke="white" stroke-width="0.8" fill="none" transform="rotate(0 200 160)"/>
+      </svg>
+    </div>
+
     <div class="max-w-4xl mx-auto text-center relative z-10 px-4">
-      <h3 class="text-xs tracking-[0.3em] uppercase text-stone-400 font-light mb-8" data-aos="fade-up">COUNTDOWN HARI
+      <h3 class="text-xs tracking-[0.3em] uppercase text-bw-400 font-light mb-8" data-aos="fade-up">COUNTDOWN HARI
         BAHAGIA</h3>
 
       <!-- Countdown timer widgets -->
       <div id="countdown-container" class="grid grid-cols-4 gap-3 md:gap-6 max-w-2xl mx-auto" data-aos="fade-up"
         data-aos-delay="150">
         <!-- Days -->
-        <div class="glass py-6 rounded-2xl shadow-sm border border-gold/10 flex flex-col items-center">
-          <span id="days" class="font-title text-4xl md:text-5xl font-light text-stone-800">00</span>
-          <span class="text-[9px] uppercase tracking-wider text-stone-400 mt-2">Hari</span>
+        <div class="countdown-card py-6 rounded-2xl flex flex-col items-center" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.10);">
+          <span id="days" class="font-title text-4xl md:text-5xl font-light text-white">00</span>
+          <span class="text-[9px] uppercase tracking-wider text-bw-400 mt-2">Hari</span>
         </div>
         <!-- Hours -->
-        <div class="glass py-6 rounded-2xl shadow-sm border border-gold/10 flex flex-col items-center">
-          <span id="hours" class="font-title text-4xl md:text-5xl font-light text-stone-800">00</span>
-          <span class="text-[9px] uppercase tracking-wider text-stone-400 mt-2">Jam</span>
+        <div class="countdown-card py-6 rounded-2xl flex flex-col items-center" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.10);">
+          <span id="hours" class="font-title text-4xl md:text-5xl font-light text-white">00</span>
+          <span class="text-[9px] uppercase tracking-wider text-bw-400 mt-2">Jam</span>
         </div>
         <!-- Minutes -->
-        <div class="glass py-6 rounded-2xl shadow-sm border border-gold/10 flex flex-col items-center">
-          <span id="minutes" class="font-title text-4xl md:text-5xl font-light text-stone-800">00</span>
-          <span class="text-[9px] uppercase tracking-wider text-stone-400 mt-2">Menit</span>
+        <div class="countdown-card py-6 rounded-2xl flex flex-col items-center" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.10);">
+          <span id="minutes" class="font-title text-4xl md:text-5xl font-light text-white">00</span>
+          <span class="text-[9px] uppercase tracking-wider text-bw-400 mt-2">Menit</span>
         </div>
         <!-- Seconds -->
-        <div class="glass py-6 rounded-2xl shadow-sm border border-gold/10 flex flex-col items-center">
-          <span id="seconds" class="font-title text-4xl md:text-5xl font-light text-stone-800">00</span>
-          <span class="text-[9px] uppercase tracking-wider text-stone-400 mt-2">Detik</span>
+        <div class="countdown-card py-6 rounded-2xl flex flex-col items-center" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.10);">
+          <span id="seconds" class="font-title text-4xl md:text-5xl font-light text-white">00</span>
+          <span class="text-[9px] uppercase tracking-wider text-bw-400 mt-2">Detik</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- 8. DETAIL ACARA -->
-  <section id="acara" class="py-32 px-4 bg-ivory relative overflow-hidden">
-    <div class="max-w-6xl mx-auto relative z-10">
+  <section id="acara" class="py-32 px-4 relative overflow-hidden floral-bg-light floral-vine-right" style="background: var(--off-white);">
+    <!-- Floral top border decoration -->
+    <div class="absolute top-0 left-0 right-0 h-32 pointer-events-none opacity-10">
+      <svg viewBox="0 0 1200 100" class="w-full h-full" preserveAspectRatio="none">
+        <path d="M0,50 Q150,10 300,50 Q450,90 600,50 Q750,10 900,50 Q1050,90 1200,50" stroke="#1A1A17" stroke-width="1" fill="none"/>
+        <circle cx="300" cy="50" r="4" fill="#1A1A17" opacity="0.3"/>
+        <circle cx="600" cy="50" r="4" fill="#1A1A17" opacity="0.3"/>
+        <circle cx="900" cy="50" r="4" fill="#1A1A17" opacity="0.3"/>
+        <ellipse cx="300" cy="50" rx="10" ry="6" stroke="#1A1A17" stroke-width="0.8" fill="none" transform="rotate(30 300 50)" opacity="0.5"/>
+        <ellipse cx="600" cy="50" rx="10" ry="6" stroke="#1A1A17" stroke-width="0.8" fill="none" transform="rotate(-30 600 50)" opacity="0.5"/>
+        <ellipse cx="900" cy="50" rx="10" ry="6" stroke="#1A1A17" stroke-width="0.8" fill="none" transform="rotate(30 900 50)" opacity="0.5"/>
+      </svg>
+    </div>
 
+    <div class="max-w-6xl mx-auto relative z-10">
       <!-- Section Header -->
       <div class="text-center mb-24" data-aos="fade-up">
-        <span class="text-xs uppercase tracking-[0.3em] text-stone-400 font-light block mb-3">INFORMASI ACARA</span>
-        <h2 class="font-title text-4xl md:text-5xl font-light text-stone-800 tracking-wide">Agenda Pernikahan</h2>
-        <div class="w-12 h-[1px] bg-gold mx-auto mt-6"></div>
+        <span class="text-xs uppercase tracking-[0.3em] text-bw-400 font-light block mb-3">INFORMASI ACARA</span>
+        <h2 class="font-title text-4xl md:text-5xl font-light text-bw-900 tracking-wide">Agenda Pernikahan</h2>
+        <div class="section-header-floral mt-6">
+          <div class="line"></div>
+          <svg viewBox="0 0 32 16" width="28" height="14" fill="none">
+            <path d="M0,8 Q8,2 16,8 Q24,14 32,8" stroke="#3A3A33" stroke-width="0.8"/>
+            <circle cx="16" cy="8" r="2.5" stroke="#3A3A33" stroke-width="0.7" fill="none"/>
+            <circle cx="8" cy="5" r="1.2" fill="rgba(58,58,51,0.25)"/>
+            <circle cx="24" cy="11" r="1.2" fill="rgba(58,58,51,0.25)"/>
+          </svg>
+          <div class="line line-r"></div>
+        </div>
       </div>
 
       <!-- Akad & Resepsi Cards -->
@@ -374,90 +525,90 @@
 
         <!-- Akad Card -->
         <div
-          class="glass border border-gold/15 rounded-3xl p-8 md:p-12 shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 flex flex-col justify-between"
+          class="glass border border-bw-100 rounded-3xl p-8 md:p-12 shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 flex flex-col justify-between"
           data-aos="fade-right">
           <div>
             <div class="flex items-center justify-between mb-8">
-              <h3 class="font-title text-3xl font-light tracking-wide text-stone-800">Akad Nikah</h3>
-              <span class="w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center text-gold text-xs">I</span>
+              <h3 class="font-title text-3xl font-light tracking-wide text-bw-900">Akad Nikah</h3>
+              <span class="w-9 h-9 rounded-full bg-bw-900 flex items-center justify-center text-white text-xs font-semibold">I</span>
             </div>
 
             <div class="space-y-6 mb-8 text-sm">
               <div class="flex items-start gap-4">
-                <i class="far fa-calendar-alt text-gold text-lg mt-1 w-5"></i>
+                <i class="far fa-calendar-alt text-bw-600 text-lg mt-1 w-5"></i>
                 <div>
-                  <h4 class="font-semibold text-stone-800 tracking-wide">Hari & Tanggal</h4>
-                  <p class="text-stone-500 font-light mt-1"><span id="akad-hari">Sabtu</span>, <span
+                  <h4 class="font-semibold text-bw-800 tracking-wide">Hari & Tanggal</h4>
+                  <p class="text-bw-500 font-light mt-1"><span id="akad-hari">Sabtu</span>, <span
                       id="akad-tanggal">8 Agustus 2026</span></p>
                 </div>
               </div>
 
               <div class="flex items-start gap-4">
-                <i class="far fa-clock text-gold text-lg mt-1 w-5"></i>
+                <i class="far fa-clock text-bw-600 text-lg mt-1 w-5"></i>
                 <div>
-                  <h4 class="font-semibold text-stone-800 tracking-wide">Waktu</h4>
-                  <p id="akad-jam" class="text-stone-500 font-light mt-1">08:00 - 10:00 WIB</p>
+                  <h4 class="font-semibold text-bw-800 tracking-wide">Waktu</h4>
+                  <p id="akad-jam" class="text-bw-500 font-light mt-1">08:00 - 10:00 WIB</p>
                 </div>
               </div>
 
               <div class="flex items-start gap-4">
-                <i class="fas fa-map-marker-alt text-gold text-lg mt-1 w-5"></i>
+                <i class="fas fa-map-marker-alt text-bw-600 text-lg mt-1 w-5"></i>
                 <div>
-                  <h4 class="font-semibold text-stone-800 tracking-wide">Tempat & Lokasi</h4>
-                  <p id="akad-tempat" class="font-medium text-stone-700 mt-1">Indomaret Cendrawasih 74</p>
-                  <p id="akad-alamat" class="text-stone-500 font-light mt-1 leading-relaxed">Jl. Cendrawasih Raya No.74, Sawah Lama, Kec. Ciputat, Kota Tangerang Selatan, Banten 15413</p>
+                  <h4 class="font-semibold text-bw-800 tracking-wide">Tempat & Lokasi</h4>
+                  <p id="akad-tempat" class="font-medium text-bw-700 mt-1">Indomaret Cendrawasih 74</p>
+                  <p id="akad-alamat" class="text-bw-500 font-light mt-1 leading-relaxed">Jl. Cendrawasih Raya No.74, Sawah Lama, Kec. Ciputat, Kota Tangerang Selatan, Banten 15413</p>
                 </div>
               </div>
             </div>
           </div>
 
           <a id="akad-map-btn" href="" target="_blank"
-            class="btn-magnetic ripple-btn text-center block w-full bg-stone-900 hover:bg-stone-800 text-white py-3.5 rounded-xl text-xs uppercase tracking-wider font-semibold transition-all duration-300 shadow-lg hover:shadow-stone-900/10 mt-4">
+            class="btn-magnetic ripple-btn text-center block w-full bg-bw-900 hover:bg-bw-700 text-white py-3.5 rounded-xl text-xs uppercase tracking-wider font-semibold transition-all duration-300 shadow-lg mt-4">
             <i class="fas fa-map-marked-alt mr-2"></i>Petunjuk Lokasi
           </a>
         </div>
 
         <!-- Resepsi Card -->
         <div
-          class="glass border border-gold/15 rounded-3xl p-8 md:p-12 shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 flex flex-col justify-between"
+          class="glass border border-bw-100 rounded-3xl p-8 md:p-12 shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 flex flex-col justify-between"
           data-aos="fade-left">
           <div>
             <div class="flex items-center justify-between mb-8">
-              <h3 class="font-title text-3xl font-light tracking-wide text-stone-800">Resepsi Pernikahan</h3>
-              <span class="w-8 h-8 rounded-full bg-gold/10 flex items-center justify-center text-gold text-xs">II</span>
+              <h3 class="font-title text-3xl font-light tracking-wide text-bw-900">Resepsi Pernikahan</h3>
+              <span class="w-9 h-9 rounded-full bg-bw-900 flex items-center justify-center text-white text-xs font-semibold">II</span>
             </div>
 
             <div class="space-y-6 mb-8 text-sm">
               <div class="flex items-start gap-4">
-                <i class="far fa-calendar-alt text-gold text-lg mt-1 w-5"></i>
+                <i class="far fa-calendar-alt text-bw-600 text-lg mt-1 w-5"></i>
                 <div>
-                  <h4 class="font-semibold text-stone-800 tracking-wide">Hari & Tanggal</h4>
-                  <p class="text-stone-500 font-light mt-1"><span id="resepsi-hari">Minggu</span>, <span
+                  <h4 class="font-semibold text-bw-800 tracking-wide">Hari & Tanggal</h4>
+                  <p class="text-bw-500 font-light mt-1"><span id="resepsi-hari">Minggu</span>, <span
                       id="resepsi-tanggal">9 Agustus 2026</span></p>
                 </div>
               </div>
 
               <div class="flex items-start gap-4">
-                <i class="far fa-clock text-gold text-lg mt-1 w-5"></i>
+                <i class="far fa-clock text-bw-600 text-lg mt-1 w-5"></i>
                 <div>
-                  <h4 class="font-semibold text-stone-800 tracking-wide">Waktu</h4>
-                  <p id="resepsi-jam" class="text-stone-500 font-light mt-1">11:00 - 14:00 WIB</p>
+                  <h4 class="font-semibold text-bw-800 tracking-wide">Waktu</h4>
+                  <p id="resepsi-jam" class="text-bw-500 font-light mt-1">11:00 - 14:00 WIB</p>
                 </div>
               </div>
 
               <div class="flex items-start gap-4">
-                <i class="fas fa-map-marker-alt text-gold text-lg mt-1 w-5"></i>
+                <i class="fas fa-map-marker-alt text-bw-600 text-lg mt-1 w-5"></i>
                 <div>
-                  <h4 class="font-semibold text-stone-800 tracking-wide">Tempat & Lokasi</h4>
-                  <p id="resepsi-tempat" class="font-medium text-stone-700 mt-1">Sawah Lama</p>
-                  <p id="resepsi-alamat" class="text-stone-500 font-light mt-1 leading-relaxed">Sawah Lama, Kec. Ciputat, Kota Tangerang Selatan, Banten 15413</p>
+                  <h4 class="font-semibold text-bw-800 tracking-wide">Tempat & Lokasi</h4>
+                  <p id="resepsi-tempat" class="font-medium text-bw-700 mt-1">Sawah Lama</p>
+                  <p id="resepsi-alamat" class="text-bw-500 font-light mt-1 leading-relaxed">Sawah Lama, Kec. Ciputat, Kota Tangerang Selatan, Banten 15413</p>
                 </div>
               </div>
             </div>
           </div>
 
           <a id="resepsi-map-btn" href="" target="_blank"
-            class="btn-magnetic ripple-btn text-center block w-full bg-stone-900 hover:bg-stone-800 text-white py-3.5 rounded-xl text-xs uppercase tracking-wider font-semibold transition-all duration-300 shadow-lg hover:shadow-stone-900/10 mt-4">
+            class="btn-magnetic ripple-btn text-center block w-full bg-bw-900 hover:bg-bw-700 text-white py-3.5 rounded-xl text-xs uppercase tracking-wider font-semibold transition-all duration-300 shadow-lg mt-4">
             <i class="fas fa-map-marked-alt mr-2"></i>Petunjuk Lokasi
           </a>
         </div>
@@ -466,18 +617,18 @@
 
       <!-- Calendar Integration Links -->
       <div class="text-center max-w-md mx-auto" data-aos="fade-up">
-        <h4 class="text-xs uppercase tracking-widest text-stone-400 font-medium mb-4">Simpan Tanggal Pernikahan</h4>
+        <h4 class="text-xs uppercase tracking-widest text-bw-400 font-medium mb-4">Simpan Tanggal Pernikahan</h4>
         <div class="flex items-center justify-center gap-4">
           <a id="cal-google" href="" target="_blank"
-            class="btn-magnetic flex items-center gap-2 text-stone-600 hover:text-gold text-xs transition-colors duration-300 py-2.5 px-4 bg-cream/70 rounded-full border border-stone-200/60 font-medium">
+            class="btn-magnetic flex items-center gap-2 text-bw-600 hover:text-bw-900 text-xs transition-colors duration-300 py-2.5 px-4 bg-bw-50 rounded-full border border-bw-200 font-medium">
             <i class="fab fa-google"></i> Google Calendar
           </a>
           <a id="cal-apple" href=""
-            class="btn-magnetic flex items-center gap-2 text-stone-600 hover:text-gold text-xs transition-colors duration-300 py-2.5 px-4 bg-cream/70 rounded-full border border-stone-200/60 font-medium">
+            class="btn-magnetic flex items-center gap-2 text-bw-600 hover:text-bw-900 text-xs transition-colors duration-300 py-2.5 px-4 bg-bw-50 rounded-full border border-bw-200 font-medium">
             <i class="fab fa-apple"></i> Apple Calendar
           </a>
           <a id="cal-outlook" href="" target="_blank"
-            class="btn-magnetic flex items-center gap-2 text-stone-600 hover:text-gold text-xs transition-colors duration-300 py-2.5 px-4 bg-cream/70 rounded-full border border-stone-200/60 font-medium">
+            class="btn-magnetic flex items-center gap-2 text-bw-600 hover:text-bw-900 text-xs transition-colors duration-300 py-2.5 px-4 bg-bw-50 rounded-full border border-bw-200 font-medium">
             <i class="fas fa-envelope"></i> Outlook
           </a>
         </div>
@@ -487,14 +638,21 @@
   </section>
 
   <!-- 9. LOVE STORY (KISAH CINTA) -->
-  <section id="story" class="py-32 px-4 bg-cream relative overflow-hidden">
+  <section id="story" class="py-32 px-4 relative overflow-hidden floral-vine-left" style="background: var(--warm-white);">
     <div class="max-w-6xl mx-auto relative z-10">
 
       <!-- Section Header -->
       <div class="text-center mb-24" data-aos="fade-up">
-        <span class="text-xs uppercase tracking-[0.3em] text-stone-400 font-light block mb-3">OUR STORY</span>
-        <h2 class="font-title text-4xl md:text-5xl font-light text-stone-800 tracking-wide">Kisah Perjalanan Kami</h2>
-        <div class="w-12 h-[1px] bg-gold mx-auto mt-6"></div>
+        <span class="text-xs uppercase tracking-[0.3em] text-bw-400 font-light block mb-3">OUR STORY</span>
+        <h2 class="font-title text-4xl md:text-5xl font-light text-bw-900 tracking-wide">Kisah Perjalanan Kami</h2>
+        <div class="section-header-floral mt-6">
+          <div class="line"></div>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+            <path d="M12,2 C12,2 10,6 7,7 C10,8 12,12 12,12 C12,12 14,8 17,7 C14,6 12,2 12,2Z" stroke="#3A3A33" stroke-width="0.8" fill="rgba(58,58,51,0.08)"/>
+            <circle cx="12" cy="7" r="1.5" fill="rgba(58,58,51,0.2)"/>
+          </svg>
+          <div class="line line-r"></div>
+        </div>
       </div>
 
       <!-- Vertical Timeline Wrapper -->
@@ -512,14 +670,22 @@
   </section>
 
   <!-- 10. GALERI PREWEDDING -->
-  <section id="gallery" class="py-32 px-4 bg-ivory relative overflow-hidden">
+  <section id="gallery" class="py-32 px-4 relative overflow-hidden floral-bg-light floral-corner-br" style="background: var(--off-white);">
     <div class="max-w-6xl mx-auto relative z-10">
 
       <!-- Section Header -->
       <div class="text-center mb-20" data-aos="fade-up">
-        <span class="text-xs uppercase tracking-[0.3em] text-stone-400 font-light block mb-3">PREWEDDING GALLERY</span>
-        <h2 class="font-title text-4xl md:text-5xl font-light text-stone-800 tracking-wide">Momen Kebahagiaan</h2>
-        <div class="w-12 h-[1px] bg-gold mx-auto mt-6"></div>
+        <span class="text-xs uppercase tracking-[0.3em] text-bw-400 font-light block mb-3">PREWEDDING GALLERY</span>
+        <h2 class="font-title text-4xl md:text-5xl font-light text-bw-900 tracking-wide">Momen Kebahagiaan</h2>
+        <div class="section-header-floral mt-6">
+          <div class="line"></div>
+          <svg viewBox="0 0 32 20" width="28" height="16" fill="none">
+            <ellipse cx="16" cy="10" rx="8" ry="5" stroke="#3A3A33" stroke-width="0.8" transform="rotate(0 16 10)"/>
+            <ellipse cx="16" cy="10" rx="8" ry="5" stroke="#3A3A33" stroke-width="0.8" transform="rotate(90 16 10)"/>
+            <circle cx="16" cy="10" r="2" fill="rgba(58,58,51,0.18)"/>
+          </svg>
+          <div class="line line-r"></div>
+        </div>
       </div>
 
       <!-- Photo Masonry Grid loaded dynamically -->
@@ -529,7 +695,7 @@
 
       <!-- Prewedding YouTube Video Embed -->
       <div
-        class="max-w-4xl mx-auto overflow-hidden rounded-3xl shadow-xl bg-white border border-gold/15 p-2 aspect-video aos-init"
+        class="max-w-4xl mx-auto overflow-hidden rounded-3xl shadow-xl bg-white border border-bw-100 p-2 aspect-video"
         data-aos="fade-up">
         <iframe id="video-iframe-container" src="" class="w-full h-full rounded-2xl" frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -540,15 +706,15 @@
   </section>
 
   <!-- 11. RSVP FORM & WISHES GUESTBOOK -->
-  <section id="rsvp" class="py-32 px-4 bg-cream relative overflow-hidden">
+  <section id="rsvp" class="py-32 px-4 relative overflow-hidden floral-vine-left floral-vine-right" style="background: var(--warm-white);">
     <div class="max-w-5xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
 
       <!-- RSVP Input Box -->
-      <div class="lg:col-span-6 glass border border-gold/15 rounded-3xl p-8 md:p-10 shadow-sm" data-aos="fade-right">
-        <span class="text-[10px] uppercase tracking-[0.25em] text-stone-400 font-medium mb-2 block">ONLINE
+      <div class="lg:col-span-6 glass border border-bw-100 rounded-3xl p-8 md:p-10 shadow-sm" data-aos="fade-right">
+        <span class="text-[10px] uppercase tracking-[0.25em] text-bw-400 font-medium mb-2 block">ONLINE
           RESERVATION</span>
-        <h3 class="font-title text-3xl font-light tracking-wide text-stone-800 mb-6">Konfirmasi Kehadiran</h3>
-        <p class="text-xs text-stone-500 font-light mb-8 leading-relaxed">Merupakan kehormatan bagi kami atas kehadiran
+        <h3 class="font-title text-3xl font-light tracking-wide text-bw-900 mb-6">Konfirmasi Kehadiran</h3>
+        <p class="text-xs text-bw-500 font-light mb-8 leading-relaxed">Merupakan kehormatan bagi kami atas kehadiran
           Bapak/Ibu/Saudara/i untuk merayakan kebahagiaan bersama kami.</p>
 
         <!-- Form -->
@@ -556,23 +722,23 @@
           <!-- Name field -->
           <div class="floating-label-group">
             <input type="text" id="rsvp-nama" placeholder=" " required
-              class="w-full bg-white/70 border border-stone-200 rounded-xl px-4 text-xs font-light text-stone-800 focus:bg-white border-gold-focus transition-all duration-300">
+              class="w-full bg-white/80 border border-bw-200 rounded-xl px-4 text-xs font-light text-bw-900 focus:bg-white border-accent-focus transition-all duration-300">
             <label for="rsvp-nama">Nama Lengkap</label>
           </div>
 
           <!-- WhatsApp field -->
           <div class="floating-label-group">
             <input type="tel" id="rsvp-wa" placeholder=" " required
-              class="w-full bg-white/70 border border-stone-200 rounded-xl px-4 text-xs font-light text-stone-800 focus:bg-white border-gold-focus transition-all duration-300">
+              class="w-full bg-white/80 border border-bw-200 rounded-xl px-4 text-xs font-light text-bw-900 focus:bg-white border-accent-focus transition-all duration-300">
             <label for="rsvp-wa">Nomor WhatsApp</label>
           </div>
 
           <!-- Presence field -->
           <div class="flex flex-col gap-1.5">
             <label for="rsvp-kehadiran"
-              class="text-[10px] text-stone-400 tracking-wider uppercase font-medium">Konfirmasi Kehadiran</label>
+              class="text-[10px] text-bw-400 tracking-wider uppercase font-medium">Konfirmasi Kehadiran</label>
             <select id="rsvp-kehadiran"
-              class="w-full bg-white/70 border border-stone-200 rounded-xl px-4 py-3.5 text-xs font-light text-stone-800 focus:bg-white border-gold-focus transition-all duration-300">
+              class="w-full bg-white/80 border border-bw-200 rounded-xl px-4 py-3.5 text-xs font-light text-bw-900 focus:bg-white border-accent-focus transition-all duration-300">
               <option value="hadir">Hadir</option>
               <option value="tidak_hadir">Berhalangan Hadir</option>
             </select>
@@ -581,26 +747,26 @@
           <!-- Wishes Textbox -->
           <div class="floating-label-group">
             <textarea id="rsvp-ucapan" placeholder=" " rows="4" required
-              class="w-full bg-white/70 border border-stone-200 rounded-xl px-4 text-xs font-light text-stone-800 focus:bg-white border-gold-focus transition-all duration-300 resize-none"></textarea>
+              class="w-full bg-white/80 border border-bw-200 rounded-xl px-4 text-xs font-light text-bw-900 focus:bg-white border-accent-focus transition-all duration-300 resize-none"></textarea>
             <label for="rsvp-ucapan">Ucapan & Doa Restu</label>
           </div>
 
           <button type="submit"
-            class="btn-magnetic ripple-btn w-full bg-gold-gradient hover:bg-gold-light text-stone-950 py-4 rounded-xl text-xs uppercase tracking-widest font-semibold transition-all duration-300 shadow-md">
+            class="btn-magnetic ripple-btn w-full bg-bw-900 hover:bg-bw-700 text-white py-4 rounded-xl text-xs uppercase tracking-widest font-semibold transition-all duration-300 shadow-md">
             Kirim Konfirmasi
           </button>
         </form>
 
         <!-- Submit success message -->
         <div id="rsvp-success"
-          class="hidden fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm flex items-center justify-center transition-all duration-500 opacity-0">
-          <div class="glass border border-gold/30 rounded-3xl p-8 max-w-sm text-center shadow-2xl mx-4">
+          class="hidden fixed inset-0 z-50 bg-bw-900/60 backdrop-blur-sm flex items-center justify-center transition-all duration-500 opacity-0">
+          <div class="glass border border-bw-200 rounded-3xl p-8 max-w-sm text-center shadow-2xl mx-4">
             <div
-              class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center text-gold text-2xl mx-auto mb-4">
+              class="w-16 h-16 bg-bw-900 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">
               <i class="fas fa-check"></i>
             </div>
-            <h4 class="font-title text-2xl font-light text-stone-800 mb-2">Terima Kasih</h4>
-            <p class="text-xs text-stone-500 font-light leading-relaxed">Konfirmasi kehadiran dan doa restu Anda telah
+            <h4 class="font-title text-2xl font-light text-bw-800 mb-2">Terima Kasih</h4>
+            <p class="text-xs text-bw-500 font-light leading-relaxed">Konfirmasi kehadiran dan doa restu Anda telah
               berhasil dikirimkan.</p>
           </div>
         </div>
@@ -609,8 +775,8 @@
       <!-- Guest Wishes Guestbook lists -->
       <div class="lg:col-span-6 w-full flex flex-col h-full self-stretch justify-between" data-aos="fade-left">
         <div>
-          <span class="text-[10px] uppercase tracking-[0.25em] text-stone-400 font-medium mb-2 block">GUESTBOOK</span>
-          <h3 class="font-title text-3xl font-light tracking-wide text-stone-800 mb-6">Ucapan & Doa Restu</h3>
+          <span class="text-[10px] uppercase tracking-[0.25em] text-bw-400 font-medium mb-2 block">GUESTBOOK</span>
+          <h3 class="font-title text-3xl font-light tracking-wide text-bw-900 mb-6">Ucapan & Doa Restu</h3>
         </div>
 
         <!-- Wishes scrollable lists -->
@@ -623,15 +789,15 @@
   </section>
 
   <!-- 12. DIGITAL ENVELOPE (AMPLOP DIGITAL) -->
-  <section id="envelope" class="py-32 px-4 bg-ivory relative overflow-hidden">
+  <section id="envelope" class="py-32 px-4 relative overflow-hidden floral-bg-light floral-corner-tl floral-corner-br" style="background: var(--off-white);">
     <div class="max-w-4xl mx-auto relative z-10 text-center px-4">
 
       <!-- Section Header -->
       <div class="mb-20" data-aos="fade-up">
-        <span class="text-xs uppercase tracking-[0.3em] text-stone-400 font-light block mb-3">WEDDING GIFT</span>
-        <h2 class="font-title text-4xl md:text-5xl font-light text-stone-800 tracking-wide">Kirim Hadiah</h2>
-        <div class="w-12 h-[1px] bg-gold mx-auto mt-6"></div>
-        <p class="text-xs text-stone-500 font-light max-w-md mx-auto mt-6 leading-relaxed">Bagi keluarga dan kerabat
+        <span class="text-xs uppercase tracking-[0.3em] text-bw-400 font-light block mb-3">WEDDING GIFT</span>
+        <h2 class="font-title text-4xl md:text-5xl font-light text-bw-900 tracking-wide">Kirim Hadiah</h2>
+        <div class="section-line mt-6"></div>
+        <p class="text-xs text-bw-500 font-light max-w-md mx-auto mt-6 leading-relaxed">Bagi keluarga dan kerabat
           yang ingin mengirimkan hadiah digital sebagai tanda kasih restu, dapat melalui rekening berikut:</p>
       </div>
 
@@ -639,47 +805,46 @@
 
         <!-- Account Card 1 -->
         <div
-          class="glass border border-gold/15 rounded-3xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 relative flex flex-col justify-between"
+          class="glass border border-bw-100 rounded-3xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 relative flex flex-col justify-between"
           data-aos="fade-right">
           <div>
             <div class="flex items-center justify-between mb-6">
-              <!-- Simple elegant logo representations -->
-              <span class="text-stone-700 font-title font-bold text-xl tracking-widest uppercase">BCA</span>
-              <i class="far fa-credit-card text-gold text-lg"></i>
+              <span class="text-bw-900 font-title font-bold text-xl tracking-widest uppercase">BCA</span>
+              <i class="far fa-credit-card text-bw-500 text-lg"></i>
             </div>
 
-            <p class="text-[10px] text-stone-400 tracking-wider text-left uppercase">Nomor Rekening</p>
-            <p class="font-title text-2xl tracking-wider text-stone-800 text-left font-semibold my-1 select-all">1234
+            <p class="text-[10px] text-bw-400 tracking-wider text-left uppercase">Nomor Rekening</p>
+            <p class="font-title text-2xl tracking-wider text-bw-900 text-left font-semibold my-1 select-all">1234
               5678 90</p>
-            <p class="text-xs text-stone-500 text-left font-light mt-1">Atas nama: <span
-                class="font-medium text-stone-700">Burhanudin Gunawan</span></p>
+            <p class="text-xs text-bw-500 text-left font-light mt-1">Atas nama: <span
+                class="font-medium text-bw-700">Burhanudin Gunawan</span></p>
           </div>
 
           <button
-            class="btn-copy-account btn-magnetic ripple-btn w-full bg-stone-900 hover:bg-stone-800 text-white py-3 rounded-xl text-[10px] uppercase tracking-wider font-semibold transition-all duration-300 mt-6">
+            class="btn-copy-account btn-magnetic ripple-btn w-full bg-bw-900 hover:bg-bw-700 text-white py-3 rounded-xl text-[10px] uppercase tracking-wider font-semibold transition-all duration-300 mt-6">
             <i class="far fa-copy mr-2"></i>Salin Rekening
           </button>
         </div>
 
         <!-- Account Card 2 -->
         <div
-          class="glass border border-gold/15 rounded-3xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 relative flex flex-col justify-between"
+          class="glass border border-bw-100 rounded-3xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 relative flex flex-col justify-between"
           data-aos="fade-left">
           <div>
             <div class="flex items-center justify-between mb-6">
-              <span class="text-stone-700 font-title font-bold text-xl tracking-widest uppercase">MANDIRI</span>
-              <i class="far fa-credit-card text-gold text-lg"></i>
+              <span class="text-bw-900 font-title font-bold text-xl tracking-widest uppercase">MANDIRI</span>
+              <i class="far fa-credit-card text-bw-500 text-lg"></i>
             </div>
 
-            <p class="text-[10px] text-stone-400 tracking-wider text-left uppercase">Nomor Rekening</p>
-            <p class="font-title text-2xl tracking-wider text-stone-800 text-left font-semibold my-1 select-all">0987
+            <p class="text-[10px] text-bw-400 tracking-wider text-left uppercase">Nomor Rekening</p>
+            <p class="font-title text-2xl tracking-wider text-bw-900 text-left font-semibold my-1 select-all">0987
               6543 2112 3</p>
-            <p class="text-xs text-stone-500 text-left font-light mt-1">Atas nama: <span
-                class="font-medium text-stone-700">Fira Alfiana Suhadi</span></p>
+            <p class="text-xs text-bw-500 text-left font-light mt-1">Atas nama: <span
+                class="font-medium text-bw-700">Fira Alfiana Suhadi</span></p>
           </div>
 
           <button
-            class="btn-copy-account btn-magnetic ripple-btn w-full bg-stone-900 hover:bg-stone-800 text-white py-3 rounded-xl text-[10px] uppercase tracking-wider font-semibold transition-all duration-300 mt-6">
+            class="btn-copy-account btn-magnetic ripple-btn w-full bg-bw-900 hover:bg-bw-700 text-white py-3 rounded-xl text-[10px] uppercase tracking-wider font-semibold transition-all duration-300 mt-6">
             <i class="far fa-copy mr-2"></i>Salin Rekening
           </button>
         </div>
@@ -687,7 +852,7 @@
       </div>
 
       <!-- QRIS QR code component container -->
-      <div id="qris-box" class="glass border border-gold/15 max-w-sm mx-auto p-8 rounded-3xl shadow-sm"
+      <div id="qris-box" class="glass border border-bw-100 max-w-sm mx-auto p-8 rounded-3xl shadow-sm"
         data-aos="zoom-in">
         <div id="qris-qr-container" class="flex flex-col items-center justify-center">
           <!-- Populated by app.js -->
@@ -700,24 +865,23 @@
   <!-- 13. MAPS & LOCATION -->
   <section class="w-full h-[450px] relative overflow-hidden" data-aos="fade-up">
     <!-- Map Embed Frame -->
-    <iframe id="maps-iframe" src="" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+    <iframe id="maps-iframe" src="" width="100%" height="100%" style="border:0; filter: grayscale(1);" allowfullscreen="" loading="lazy"
       referrerpolicy="no-referrer-when-downgrade"></iframe>
 
     <!-- Floating Maps directions triggers -->
     <div
-      class="absolute bottom-6 left-6 right-6 md:left-12 md:right-auto z-10 glass border border-gold/20 p-6 rounded-3xl max-w-md shadow-2xl flex flex-col md:flex-row items-center gap-4">
+      class="absolute bottom-6 left-6 right-6 md:left-12 md:right-auto z-10 glass border border-bw-200 p-6 rounded-3xl max-w-md shadow-2xl flex flex-col md:flex-row items-center gap-4">
       <div class="text-center md:text-left">
-        <h4 class="font-title text-lg font-semibold text-stone-800">The Glass House Ballroom</h4>
-        <p class="text-[10px] text-stone-500 font-light mt-1 leading-relaxed">Kuningan Place Tower B Lt. 3, Jl. Kuningan
-          Mulia, Jakarta Selatan</p>
+        <h4 class="font-title text-lg font-semibold text-bw-900">Lokasi Pernikahan</h4>
+        <p class="text-[10px] text-bw-500 font-light mt-1 leading-relaxed">Sawah Lama, Kec. Ciputat, Kota Tangerang Selatan</p>
       </div>
       <div class="flex items-center gap-2 w-full md:w-auto">
         <a id="global-map-btn" href="" target="_blank"
-          class="btn-magnetic block text-center bg-stone-900 hover:bg-stone-800 text-white py-2 px-4 rounded-xl text-[10px] uppercase tracking-wider font-semibold transition-all duration-300 shadow-md w-full whitespace-nowrap">
+          class="btn-magnetic block text-center bg-bw-900 hover:bg-bw-700 text-white py-2 px-4 rounded-xl text-[10px] uppercase tracking-wider font-semibold transition-all duration-300 shadow-md w-full whitespace-nowrap">
           Google Maps
         </a>
         <a id="global-nav-btn" href="" target="_blank"
-          class="btn-magnetic block text-center border border-stone-200 text-stone-700 hover:bg-stone-100 py-2 px-4 rounded-xl text-[10px] uppercase tracking-wider font-semibold transition-all duration-300 w-full whitespace-nowrap">
+          class="btn-magnetic block text-center border border-bw-200 text-bw-700 hover:bg-bw-100 py-2 px-4 rounded-xl text-[10px] uppercase tracking-wider font-semibold transition-all duration-300 w-full whitespace-nowrap">
           Navigasi
         </a>
       </div>
@@ -725,37 +889,41 @@
   </section>
 
   <!-- 14. CLOSING & FOOTER -->
-  <section class="py-32 px-4 bg-cream relative overflow-hidden text-center">
-    <!-- Center floral emblem -->
-    <div class="w-16 h-16 mx-auto mb-8 floating-floral opacity-30">
-      <svg viewBox="0 0 100 100" class="floral-svg w-full h-full">
-        <path d="M50,10 Q50,50 90,50 M50,10 Q50,50 10,50 M50,90 Q50,50 90,50 M50,90 Q50,50 10,50" />
-        <circle cx="50" cy="50" r="4" fill="#D4AF37" />
+  <section class="py-32 px-4 relative overflow-hidden text-center floral-bg-dark floral-corner-tl-white floral-corner-br-white" style="background: var(--black-soft);">
+    <!-- Floral center emblem -->
+    <div class="w-20 h-20 mx-auto mb-8 floating-floral opacity-20">
+      <svg viewBox="0 0 100 100" class="w-full h-full">
+        <ellipse cx="50" cy="50" rx="22" ry="14" stroke="white" stroke-width="0.8" fill="none" transform="rotate(0 50 50)"/>
+        <ellipse cx="50" cy="50" rx="22" ry="14" stroke="white" stroke-width="0.8" fill="none" transform="rotate(45 50 50)"/>
+        <ellipse cx="50" cy="50" rx="22" ry="14" stroke="white" stroke-width="0.8" fill="none" transform="rotate(90 50 50)"/>
+        <ellipse cx="50" cy="50" rx="22" ry="14" stroke="white" stroke-width="0.8" fill="none" transform="rotate(135 50 50)"/>
+        <circle cx="50" cy="50" r="5" stroke="white" stroke-width="1" fill="rgba(255,255,255,0.2)"/>
+        <circle cx="50" cy="50" r="2" fill="white" opacity="0.6"/>
       </svg>
     </div>
 
     <div class="max-w-2xl mx-auto px-4 relative z-10 flex flex-col items-center">
-      <h3 class="font-title text-3xl font-light text-stone-800 mb-6">Terima Kasih</h3>
-      <p class="text-xs text-stone-500 font-light leading-relaxed mb-8 max-w-md">
+      <h3 class="font-title text-3xl font-light text-white mb-6">Terima Kasih</h3>
+      <p class="text-xs text-bw-400 font-light leading-relaxed mb-8 max-w-md">
         Ungkapan terima kasih yang tulus dari lubuk hati kami bagi keluarga, sahabat, dan kerabat yang berkenan hadir
         dan memberikan restu suci bagi pernikahan kami.
       </p>
 
-      <span class="text-xs tracking-[0.25em] text-stone-400 font-light mb-4 block">KAMI YANG BERBAHAGIA</span>
-      <h2 class="font-title text-4xl text-stone-800 font-light tracking-wide mb-12">
+      <span class="text-xs tracking-[0.25em] text-bw-500 font-light mb-4 block">KAMI YANG BERBAHAGIA</span>
+      <h2 class="font-title text-4xl text-white font-light tracking-wide mb-12">
         <span id="closing-pria-nama">Burhan</span> & <span id="closing-wanita-nama">Fira</span>
       </h2>
 
       <!-- Share invitation layout -->
-      <div class="glass border border-gold/15 p-6 rounded-3xl max-w-sm mb-12">
-        <p class="text-[10px] uppercase tracking-widest text-stone-400 font-medium mb-3">Bagikan Undangan Ini</p>
+      <div class="glass border border-white/10 p-6 rounded-3xl max-w-sm mb-12" style="background:rgba(255,255,255,0.05);">
+        <p class="text-[10px] uppercase tracking-widest text-bw-400 font-medium mb-3">Bagikan Undangan Ini</p>
         <button id="share-invitation-btn"
-          class="btn-magnetic ripple-btn bg-stone-900 hover:bg-stone-800 text-white w-full py-3 rounded-xl text-xs font-semibold tracking-wider uppercase transition-colors duration-300">
+          class="btn-magnetic ripple-btn bg-white hover:bg-bw-100 text-bw-900 w-full py-3 rounded-xl text-xs font-semibold tracking-wider uppercase transition-colors duration-300">
           <i class="fab fa-whatsapp mr-2 text-sm"></i>Bagikan ke WhatsApp
         </button>
       </div>
 
-      <footer class="text-[9px] uppercase tracking-[0.2em] text-stone-400 border-t border-stone-200/60 pt-8 w-full">
+      <footer class="text-[9px] uppercase tracking-[0.2em] text-bw-600 border-t border-white/10 pt-8 w-full">
         © 2026 Burhan & Fira. All Rights Reserved. Created with Love.
       </footer>
     </div>
@@ -764,15 +932,15 @@
   <!-- 15. LIGHTBOX MODAL CONTAINER -->
   <div id="lightbox" class="lightbox-modal">
     <button id="lightbox-close"
-      class="absolute top-6 right-6 text-white hover:text-gold text-2xl transition-colors duration-300">
+      class="absolute top-6 right-6 text-white hover:text-bw-300 text-2xl transition-colors duration-300">
       <i class="fas fa-times"></i>
     </button>
     <button id="lightbox-prev"
-      class="absolute left-6 text-white hover:text-gold text-2xl transition-colors duration-300">
+      class="absolute left-6 text-white hover:text-bw-300 text-2xl transition-colors duration-300">
       <i class="fas fa-chevron-left"></i>
     </button>
     <button id="lightbox-next"
-      class="absolute right-6 text-white hover:text-gold text-2xl transition-colors duration-300">
+      class="absolute right-6 text-white hover:text-bw-300 text-2xl transition-colors duration-300">
       <i class="fas fa-chevron-right"></i>
     </button>
     <img id="lightbox-img" src="" alt="Zoom Photo"
@@ -781,21 +949,20 @@
 
   <!-- 16. BACKGROUND MUSIC CONTROLLER WIDGET -->
   <div id="music-widget"
-    class="fixed bottom-6 left-6 z-50 glass border border-gold/20 py-2.5 px-4 rounded-full shadow-xl flex items-center gap-4 transition-all duration-500 translate-y-40">
+    class="fixed bottom-6 left-6 z-50 glass border border-bw-200 py-2.5 px-4 rounded-full shadow-xl flex items-center gap-4 transition-all duration-500 translate-y-40">
     <audio id="audio-player"></audio>
 
     <!-- Music trigger -->
     <button
-      class="music-toggle-btn w-9 h-9 rounded-full bg-gold-gradient text-stone-950 flex items-center justify-center transition-transform duration-300 hover:scale-105 btn-magnetic">
+      class="music-toggle-btn w-9 h-9 rounded-full bg-bw-900 text-white flex items-center justify-center transition-transform duration-300 hover:scale-105 btn-magnetic">
       <i class="music-btn-icon fas fa-play text-xs pl-0.5"></i>
     </button>
 
     <!-- EQ Visualizer & detail info -->
     <div class="hidden sm:flex flex-col">
-      <span id="music-name-title" class="text-[9px] text-stone-600 font-medium truncate max-w-[120px]">Background
+      <span id="music-name-title" class="text-[9px] text-bw-600 font-medium truncate max-w-[120px]">Background
         Music</span>
       <div class="equalizer mt-1.5">
-        <div class="eq-bar"></div>
         <div class="eq-bar"></div>
         <div class="eq-bar"></div>
         <div class="eq-bar"></div>
@@ -804,23 +971,23 @@
 
     <!-- Volume slider container -->
     <div class="flex items-center gap-2">
-      <i class="fas fa-volume-down text-[10px] text-stone-400"></i>
+      <i class="fas fa-volume-down text-[10px] text-bw-400"></i>
       <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.7"
-        class="w-16 h-1 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-gold">
+        class="w-16 h-1 bg-bw-200 rounded-lg appearance-none cursor-pointer accent-bw-900">
     </div>
   </div>
 
   <!-- 17. BACK TO TOP BUTTON -->
   <button id="back-to-top"
-    class="fixed bottom-6 right-6 z-50 w-10 h-10 rounded-full glass border border-gold/20 flex items-center justify-center text-stone-600 hover:text-gold transition-all duration-500 translate-y-40 opacity-0 btn-magnetic">
+    class="fixed bottom-6 right-6 z-50 w-10 h-10 rounded-full glass border border-bw-200 flex items-center justify-center text-bw-600 hover:text-bw-900 transition-all duration-500 translate-y-40 opacity-0 btn-magnetic">
     <i class="fas fa-chevron-up text-xs"></i>
   </button>
 
   <!-- 18. TOAST NOTIFICATION CONTAINER -->
   <div id="toast"
-    class="toast-container glass border border-gold/20 py-3 px-6 rounded-2xl shadow-xl flex items-center gap-3">
-    <i class="fas fa-check-circle text-gold text-sm"></i>
-    <span class="toast-text text-stone-700 text-xs font-light tracking-wide">Teks disalin!</span>
+    class="toast-container glass border border-bw-200 py-3 px-6 rounded-2xl shadow-xl flex items-center gap-3">
+    <i class="fas fa-check-circle text-bw-700 text-sm"></i>
+    <span class="toast-text text-bw-700 text-xs font-light tracking-wide">Teks disalin!</span>
   </div>
 
   <!-- GSAP Animation Library -->
@@ -831,6 +998,9 @@
 
   <!-- App Core JS -->
   <script src="js/app.js"></script>
+
+  <!-- Floral Animation Overlay (non-invasive decorative layer) -->
+  <script src="js/floral-anim.js" defer></script>
 </body>
 
 </html>

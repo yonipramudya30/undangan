@@ -166,13 +166,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const timelineItem = `
         <div class="mb-12 flex justify-between items-center w-full ${isEven ? 'flex-row-reverse' : ''} aos-init" data-aos="${isEven ? 'fade-left' : 'fade-right'}">
           <div class="w-5/12 hidden md:block"></div>
-          <div class="z-20 flex items-center order-1 bg-gold-gradient w-10 h-10 rounded-full timeline-dot border-2 border-white justify-center text-white text-sm font-semibold">
+          <div class="z-20 flex items-center order-1 bg-bw-900 w-10 h-10 rounded-full timeline-dot border-2 border-white justify-center text-white text-sm font-semibold">
             ${idx + 1}
           </div>
-          <div class="order-1 glass rounded-2xl w-full md:w-5/12 px-6 py-6 shadow-sm hover:shadow-md transition-shadow duration-300">
-            <span class="mb-1 text-xs font-semibold text-gold block tracking-widest">${story.tanggal}</span>
-            <h3 class="mb-2 font-bold text-lg font-title tracking-wide text-stone-800">${story.judul}</h3>
-            <p class="text-xs leading-relaxed text-stone-600 font-light">${story.deskripsi}</p>
+          <div class="order-1 glass rounded-2xl w-full md:w-5/12 px-6 py-6 shadow-sm hover:shadow-md transition-shadow duration-300 border border-bw-100">
+            <span class="mb-1 text-xs font-semibold text-bw-600 block tracking-widest">${story.tanggal}</span>
+            <h3 class="mb-2 font-bold text-lg font-title tracking-wide text-bw-900">${story.judul}</h3>
+            <p class="text-xs leading-relaxed text-bw-500 font-light">${story.deskripsi}</p>
           </div>
         </div>
       `;
@@ -186,9 +186,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const jpgSrc = imgSrc.replace('.svg', '.jpg');
       const item = `
         <div class="overflow-hidden rounded-2xl cursor-pointer group shadow-sm hover:shadow-lg transition-all duration-500 relative lazy-svg-wrapper aos-init" data-aos="fade-up" data-aos-delay="${idx * 150}">
-          <img src="${jpgSrc}" data-src-svg="${imgSrc}" alt="Prewedding Burhan & Fira ${idx + 1}" class="w-full h-72 object-cover transition-transform duration-700 ease-out group-hover:scale-110 lazy-svg" loading="lazy" />
-          <div class="absolute inset-0 bg-stone-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-            <div class="w-12 h-12 rounded-full glass flex items-center justify-center text-gold transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+          <img src="${jpgSrc}" data-src-svg="${imgSrc}" alt="Prewedding Burhan & Fira ${idx + 1}" class="w-full h-72 object-cover transition-transform duration-700 ease-out group-hover:scale-110 lazy-svg grayscale group-hover:grayscale-0 transition-all" loading="lazy" />
+          <div class="absolute inset-0 bg-bw-900/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+            <div class="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center text-bw-900 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
               <i class="fas fa-search-plus"></i>
             </div>
           </div>
@@ -225,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (distance < 0) {
         clearInterval(timerInterval);
-        document.getElementById("countdown-container").innerHTML = `<div class="text-center font-title text-2xl text-gold">Hari Bahagia Telah Tiba!</div>`;
+        document.getElementById("countdown-container").innerHTML = `<div class="text-center font-title text-2xl text-white">Hari Bahagia Telah Tiba!</div>`;
         return;
       }
 
@@ -346,11 +346,11 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       navItems.forEach(item => {
-        item.classList.remove("text-gold", "font-semibold");
-        item.classList.add("text-stone-500");
+        item.classList.remove("text-bw-900", "font-semibold");
+        item.classList.add("text-bw-400");
         if (item.getAttribute("href") === `#${currentSectionId}`) {
-          item.classList.remove("text-stone-500");
-          item.classList.add("text-gold", "font-semibold");
+          item.classList.remove("text-bw-400");
+          item.classList.add("text-bw-900", "font-semibold");
         }
       });
     }
@@ -453,104 +453,130 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // 8. Background Music Configuration
+  // 8. Background Music Configuration — YouTube IFrame Player API
   function setupMusic(musicConfig) {
-    audioPlayer = document.getElementById("audio-player");
-    if (!audioPlayer) return;
+    const youtubeId = musicConfig.youtube_id;
+    if (!youtubeId) return;
 
-    // Load music source from JSON
-    audioPlayer.src = musicConfig.file_path;
-    audioPlayer.loop = true;
-    audioPlayer.volume = 0.7; // default volume
-
-    // Equalizer bars
-    const eqBars = document.querySelectorAll(".eq-bar");
-
-    function startEqualizerAnim() {
-      eqBars.forEach(bar => bar.classList.add("animating"));
-    }
-
-    function stopEqualizerAnim() {
-      eqBars.forEach(bar => bar.classList.remove("animating"));
-    }
-
-    // Toggle Music Play/Pause Buttons
-    const toggleBtns = document.querySelectorAll(".music-toggle-btn");
-    const btnIcons = document.querySelectorAll(".music-btn-icon");
-
-    toggleBtns.forEach(btn => {
-      btn.addEventListener("click", toggleMusic);
-    });
-
-    function toggleMusic() {
-      if (isMusicPlaying) {
-        audioPlayer.pause();
-        isMusicPlaying = false;
-        btnIcons.forEach(icon => {
-          icon.classList.remove("fa-pause");
-          icon.classList.add("fa-play");
-        });
-        stopEqualizerAnim();
-        showToast("Musik Dijeda");
-      } else {
-        audioPlayer.play().then(() => {
-          isMusicPlaying = true;
-          btnIcons.forEach(icon => {
-            icon.classList.remove("fa-play");
-            icon.classList.add("fa-pause");
-          });
-          startEqualizerAnim();
-          showToast("Musik Diputar");
-        }).catch(err => {
-          console.warn("Audio autoplay blocked or failed:", err);
-        });
-      }
-    }
-
-    // Volume Slider
+    const eqBars      = document.querySelectorAll(".eq-bar");
+    const toggleBtns  = document.querySelectorAll(".music-toggle-btn");
+    const btnIcons     = document.querySelectorAll(".music-btn-icon");
     const volumeSlider = document.getElementById("volume-slider");
-    if (volumeSlider) {
-      volumeSlider.addEventListener("input", (e) => {
-        const vol = parseFloat(e.target.value);
-        audioPlayer.volume = vol;
-        if (vol === 0) {
-          stopEqualizerAnim();
-        } else if (isMusicPlaying) {
-          startEqualizerAnim();
+
+    // Update widget title
+    const titleEl = document.getElementById("music-name-title");
+    if (titleEl) titleEl.innerText = musicConfig.judul || "Music Pernikahan";
+
+    let ytPlayer    = null;
+    let ytReady     = false;
+    let pendingPlay = false;
+
+    function startEqualizerAnim() { eqBars.forEach(b => b.classList.add("animating")); }
+    function stopEqualizerAnim()  { eqBars.forEach(b => b.classList.remove("animating")); }
+
+    // Inject hidden YouTube iframe container
+    const iframeWrap = document.createElement("div");
+    iframeWrap.id = "yt-music-container";
+    iframeWrap.style.cssText = "position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;pointer-events:none;z-index:-1;";
+    iframeWrap.innerHTML = '<div id="yt-music-player"></div>';
+    document.body.appendChild(iframeWrap);
+
+    function initYTPlayer() {
+      ytPlayer = new YT.Player("yt-music-player", {
+        videoId: youtubeId,
+        playerVars: {
+          autoplay: 0,
+          loop: 1,
+          playlist: youtubeId,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          iv_load_policy: 3,
+          modestbranding: 1,
+          rel: 0,
+          origin: window.location.origin
+        },
+        events: {
+          onReady: function(e) {
+            ytReady = true;
+            e.target.setVolume(70);
+            if (pendingPlay) { e.target.playVideo(); pendingPlay = false; }
+          },
+          onStateChange: function(e) {
+            if (e.data === YT.PlayerState.PLAYING) {
+              isMusicPlaying = true;
+              btnIcons.forEach(ic => { ic.classList.remove("fa-play"); ic.classList.add("fa-pause"); });
+              startEqualizerAnim();
+            } else if (e.data === YT.PlayerState.PAUSED) {
+              isMusicPlaying = false;
+              btnIcons.forEach(ic => { ic.classList.remove("fa-pause"); ic.classList.add("fa-play"); });
+              stopEqualizerAnim();
+            } else if (e.data === YT.PlayerState.ENDED) {
+              // Manual loop fallback
+              if (ytReady) { ytPlayer.seekTo(0); ytPlayer.playVideo(); }
+            }
+          }
         }
       });
     }
 
-    // Buka Undangan Click logic to open, trigger music and animation entry
+    function loadYTAPI() {
+      if (window.YT && window.YT.Player) { initYTPlayer(); return; }
+      // Set global callback for when YT API loads
+      const prevCallback = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = function() {
+        if (prevCallback) prevCallback();
+        initYTPlayer();
+      };
+      if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
+        const tag = document.createElement("script");
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.head.appendChild(tag);
+      }
+    }
+
+    function playMusic() {
+      if (!ytReady) { pendingPlay = true; loadYTAPI(); return; }
+      ytPlayer.playVideo();
+    }
+
+    function pauseMusic() {
+      if (ytReady && ytPlayer) ytPlayer.pauseVideo();
+    }
+
+    function toggleMusic() {
+      if (isMusicPlaying) { pauseMusic(); showToast("Musik Dijeda"); }
+      else { playMusic(); showToast("Musik Diputar"); }
+    }
+
+    toggleBtns.forEach(btn => btn.addEventListener("click", toggleMusic));
+
+    // Volume slider (YT API uses 0-100)
+    if (volumeSlider) {
+      volumeSlider.addEventListener("input", (e) => {
+        const vol = Math.round(parseFloat(e.target.value) * 100);
+        if (ytReady && ytPlayer) ytPlayer.setVolume(vol);
+        if (vol === 0) stopEqualizerAnim();
+        else if (isMusicPlaying) startEqualizerAnim();
+      });
+    }
+
+    // Buka Undangan: open cover + auto-play music
     const openBtn = document.getElementById("btn-buka-undangan");
-    const cover = document.getElementById("cover-screen");
-    
+    const cover   = document.getElementById("cover-screen");
+
     if (openBtn && cover) {
       openBtn.addEventListener("click", () => {
-        // Unlock Audio Play
-        audioPlayer.play().then(() => {
-          isMusicPlaying = true;
-          btnIcons.forEach(icon => {
-            icon.classList.remove("fa-play");
-            icon.classList.add("fa-pause");
-          });
-          startEqualizerAnim();
-        }).catch(err => {
-          console.warn("Audio play blocked by browser:", err);
-        });
+        // Load API and schedule play
+        pendingPlay = true;
+        loadYTAPI();
 
-        // Add class to lift up/fade cover
+        // Lift cover
         cover.classList.add("-translate-y-full", "opacity-0");
         setTimeout(() => {
           cover.style.display = "none";
-          // Initialize AOS and GSAP entrance after cover is fully dismissed
           if (typeof AOS !== "undefined") {
-            AOS.init({
-              duration: 800,
-              easing: "ease-out-cubic",
-              once: true,
-              delay: 50
-            });
+            AOS.init({ duration: 800, easing: "ease-out-cubic", once: true, delay: 50 });
           }
           triggerGSAPEntrance();
         }, 1200);
@@ -558,7 +584,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Show floating controls & navbar
         document.getElementById("floating-nav").classList.remove("translate-y-40");
         document.getElementById("music-widget").classList.remove("translate-y-40");
-        
+
         // Show Back to Top
         const btt = document.getElementById("back-to-top");
         if (btt) {
@@ -571,9 +597,7 @@ document.addEventListener("DOMContentLoaded", () => {
               btt.classList.remove("translate-y-0", "opacity-100");
             }
           });
-          btt.addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          });
+          btt.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
         }
       });
     }
@@ -612,31 +636,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const qrisContainer = document.getElementById("qris-qr-container");
     if (qrisContainer) {
       qrisContainer.innerHTML = `
-        <svg viewBox="0 0 200 200" class="w-44 h-44 mx-auto border-4 border-amber-100 rounded-lg p-2 bg-white">
+        <svg viewBox="0 0 200 200" class="w-44 h-44 mx-auto border-4 border-bw-100 rounded-lg p-2 bg-white">
           <!-- Background QR blocks visual representation -->
-          <rect x="10" y="10" width="40" height="40" fill="#1e1a15" />
+          <rect x="10" y="10" width="40" height="40" fill="#1A1A17" />
           <rect x="20" y="20" width="20" height="20" fill="#fff" />
-          <rect x="25" y="25" width="10" height="10" fill="#1e1a15" />
+          <rect x="25" y="25" width="10" height="10" fill="#1A1A17" />
           
-          <rect x="150" y="10" width="40" height="40" fill="#1e1a15" />
+          <rect x="150" y="10" width="40" height="40" fill="#1A1A17" />
           <rect x="160" y="20" width="20" height="20" fill="#fff" />
-          <rect x="165" y="25" width="10" height="10" fill="#1e1a15" />
+          <rect x="165" y="25" width="10" height="10" fill="#1A1A17" />
           
-          <rect x="10" y="150" width="40" height="40" fill="#1e1a15" />
+          <rect x="10" y="150" width="40" height="40" fill="#1A1A17" />
           <rect x="20" y="160" width="20" height="20" fill="#fff" />
-          <rect x="25" y="165" width="10" height="10" fill="#1e1a15" />
+          <rect x="25" y="165" width="10" height="10" fill="#1A1A17" />
           
           <!-- Middle dummy code representation -->
-          <path d="M 60,20 H 140 M 60,30 H 100 M 110,35 H 140 M 60,60 H 80 M 100,60 H 120 M 130,65 H 180" stroke="#1e1a15" stroke-width="4" stroke-linecap="round"/>
-          <path d="M 20,60 V 140 M 30,60 V 90 M 35,110 V 140 M 60,80 V 120 M 120,80 V 140 M 140,80 V 120" stroke="#1e1a15" stroke-width="4" stroke-linecap="round"/>
-          <path d="M 60,100 H 140 M 60,120 H 100 M 110,130 H 180 M 60,140 H 80 M 100,150 H 120 M 130,165 H 180" stroke="#1e1a15" stroke-width="4" stroke-linecap="round"/>
-          <path d="M 160,60 V 140 M 170,60 V 90 M 175,110 V 140 M 150,80 V 120 M 180,80 V 140" stroke="#1e1a15" stroke-width="4" stroke-linecap="round"/>
+          <path d="M 60,20 H 140 M 60,30 H 100 M 110,35 H 140 M 60,60 H 80 M 100,60 H 120 M 130,65 H 180" stroke="#1A1A17" stroke-width="4" stroke-linecap="round"/>
+          <path d="M 20,60 V 140 M 30,60 V 90 M 35,110 V 140 M 60,80 V 120 M 120,80 V 140 M 140,80 V 120" stroke="#1A1A17" stroke-width="4" stroke-linecap="round"/>
+          <path d="M 60,100 H 140 M 60,120 H 100 M 110,130 H 180 M 60,140 H 80 M 100,150 H 120 M 130,165 H 180" stroke="#1A1A17" stroke-width="4" stroke-linecap="round"/>
+          <path d="M 160,60 V 140 M 170,60 V 90 M 175,110 V 140 M 150,80 V 120 M 180,80 V 140" stroke="#1A1A17" stroke-width="4" stroke-linecap="round"/>
           
-          <!-- Central Gold Heart Badge -->
-          <circle cx="100" cy="100" r="16" fill="#D4AF37" />
+          <!-- Central Monochrome Heart Badge -->
+          <circle cx="100" cy="100" r="16" fill="#1A1A17" />
           <path d="M 100,106 C 96,102 92,100 92,96 C 92,93 94.5,91 97.5,91 C 99.2,91 100,92.5 100,92.5 C 100,92.5 100.8,91 102.5,91 C 105.5,91 108,93 108,96 C 108,100 104,102 100,106 Z" fill="#fff" />
         </svg>
-        <span class="text-[10px] text-stone-400 mt-2 block tracking-widest">PINDAI QRIS UNTUK DONASI</span>
+        <span class="text-[10px] text-bw-400 mt-2 block tracking-widest">PINDAI QRIS UNTUK DONASI</span>
       `;
     }
   }
@@ -729,19 +753,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
       wishes.forEach(wish => {
         const hadirBadge = wish.kehadiran === "hadir" 
-          ? `<span class="bg-emerald-50 text-emerald-600 text-[10px] px-2.5 py-0.5 rounded-full border border-emerald-100 font-medium tracking-wide">Hadir</span>`
-          : `<span class="bg-stone-50 text-stone-500 text-[10px] px-2.5 py-0.5 rounded-full border border-stone-200 font-medium tracking-wide">Berhalangan</span>`;
+          ? `<span class="bg-bw-900 text-white text-[10px] px-2.5 py-0.5 rounded-full font-medium tracking-wide">Hadir</span>`
+          : `<span class="bg-bw-100 text-bw-600 text-[10px] px-2.5 py-0.5 rounded-full border border-bw-200 font-medium tracking-wide">Berhalangan</span>`;
 
         const wishCard = `
-          <div class="glass p-5 rounded-2xl border border-stone-200/40 relative shadow-sm hover:shadow-md transition-all duration-300">
+          <div class="glass p-5 rounded-2xl border border-bw-100 relative shadow-sm hover:shadow-md transition-all duration-300">
             <div class="flex items-center justify-between gap-2 mb-2">
-              <h4 class="font-semibold text-stone-800 text-sm font-title tracking-wide">${wish.nama}</h4>
+              <h4 class="font-semibold text-bw-900 text-sm font-title tracking-wide">${wish.nama}</h4>
               <div class="flex items-center gap-2">
                 ${hadirBadge}
-                <span class="text-[10px] text-stone-400 font-light">${wish.waktu}</span>
+                <span class="text-[10px] text-bw-400 font-light">${wish.waktu}</span>
               </div>
             </div>
-            <p class="text-xs text-stone-600 leading-relaxed font-light whitespace-pre-wrap">${wish.ucapan}</p>
+            <p class="text-xs text-bw-600 leading-relaxed font-light whitespace-pre-wrap">${wish.ucapan}</p>
           </div>
         `;
         wishesContainer.innerHTML += wishCard;
@@ -839,16 +863,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function createPetal() {
+    // Elegant monochrome petals: white, light gray, or dark near-black
+    const palette = ["#FFFFFF", "#E8E8E4", "#C2C2BA", "#9A9A90", "#1A1A17"];
+    const color = palette[Math.floor(Math.random() * palette.length)];
     return {
       x: Math.random() * window.innerWidth,
       y: Math.random() * -window.innerHeight - 20,
-      size: Math.random() * 8 + 6,
-      opacity: Math.random() * 0.5 + 0.3,
-      speedY: Math.random() * 1.2 + 0.8,
-      speedX: Math.random() * 1 - 0.5,
+      size: Math.random() * 7 + 4,
+      opacity: Math.random() * 0.35 + 0.12,
+      speedY: Math.random() * 1.0 + 0.6,
+      speedX: Math.random() * 0.8 - 0.4,
       angle: Math.random() * Math.PI,
       spinSpeed: Math.random() * 0.02 - 0.01,
-      color: Math.random() > 0.6 ? "#D4AF37" : "#FDFBF7" // gold or ivory/white petals
+      color: color
     };
   }
 
@@ -860,22 +887,18 @@ document.addEventListener("DOMContentLoaded", () => {
       p.x += p.speedX + Math.sin(p.y / 30) * 0.5; // gentle swaying drift
       p.angle += p.spinSpeed;
 
-      // Draw elegant leaf/petal
+      // Draw elegant monochrome petal
       petalsCtx.save();
       petalsCtx.translate(p.x, p.y);
       petalsCtx.rotate(p.angle);
       petalsCtx.beginPath();
       
-      // Draw elliptic shape
-      petalsCtx.ellipse(0, 0, p.size, p.size / 2, 0, 0, Math.PI * 2);
+      // Flower petal shape using bezier curves
+      petalsCtx.moveTo(0, -p.size);
+      petalsCtx.bezierCurveTo(p.size * 0.6, -p.size * 0.6, p.size * 0.6, p.size * 0.6, 0, p.size);
+      petalsCtx.bezierCurveTo(-p.size * 0.6, p.size * 0.6, -p.size * 0.6, -p.size * 0.6, 0, -p.size);
       
-      // Set gold or white petal color with opacity
-      if (p.color === "#D4AF37") {
-        petalsCtx.fillStyle = `rgba(212, 175, 55, ${p.opacity})`;
-      } else {
-        petalsCtx.fillStyle = `rgba(253, 251, 247, ${p.opacity})`;
-      }
-      
+      petalsCtx.fillStyle = p.color + Math.round(p.opacity * 255).toString(16).padStart(2, '0');
       petalsCtx.fill();
       petalsCtx.restore();
 
