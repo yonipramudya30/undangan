@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin — Kelola Tamu Undangan | Burhan & Fira</title>
+  <title>Admin — Kelola Tamu Undangan | Nawan & Fira</title>
   <meta name="robots" content="noindex, nofollow">
 
   <!-- Google Fonts -->
@@ -326,7 +326,7 @@
       <div class="admin-header-monogram">B&F</div>
       <div>
         <div class="admin-header-title">Admin Undangan</div>
-        <div class="admin-header-subtitle">Burhan & Fira — 8 Agustus 2026</div>
+        <div class="admin-header-subtitle">Nawan & Fira — 8 Agustus 2026</div>
       </div>
     </div>
     <div class="admin-header-badge">
@@ -550,7 +550,7 @@
       const link = document.getElementById('link-preview-text').textContent;
       const name = document.getElementById('input-nama').value.trim() || 'Tamu';
       if (!link || link === '—') return;
-      const msg = `Assalamu'alaikum ${name},\n\nKami mengundang Anda untuk menghadiri pernikahan kami:\n\n*Burhan & Fira*\nSabtu, 8 Agustus 2026\n\nSilakan buka undangan online Anda di sini:\n${link}\n\nMerupakan suatu kehormatan jika Anda berkenan hadir. 🤍`;
+      const msg = `Assalamu'alaikum ${name},\n\nKami mengundang Anda untuk menghadiri pernikahan kami:\n\n*Nawan & Fira*\nSabtu, 8 Agustus 2026\n\nSilakan buka undangan online Anda di sini:\n${link}\n\nMerupakan suatu kehormatan jika Anda berkenan hadir. 🤍`;
       window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
     }
 
@@ -572,7 +572,7 @@
     function shareGuestWA(id) {
       const guest = guests.find(g => g.id === id);
       if (!guest) return;
-      const msg = `Assalamu'alaikum ${guest.name},\n\nKami mengundang Anda untuk menghadiri pernikahan kami:\n\n*Burhan & Fira*\nSabtu, 8 Agustus 2026\n\nSilakan buka undangan online Anda di sini:\n${guest.link}\n\nMerupakan suatu kehormatan jika Anda berkenan hadir. 🤍`;
+      const msg = `Assalamu'alaikum ${guest.name},\n\nKami mengundang Anda untuk menghadiri pernikahan kami:\n\n*Nawan & Fira*\nSabtu, 8 Agustus 2026\n\nSilakan buka undangan online Anda di sini:\n${guest.link}\n\nMerupakan suatu kehormatan jika Anda berkenan hadir. 🤍`;
       window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
       // Mark as shared
       guest.shared = true;

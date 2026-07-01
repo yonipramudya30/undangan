@@ -2,7 +2,7 @@
   "mempelai": {
     "pria": {
       "nama_lengkap": "Burhanudin Gunawan",
-      "nama_panggilan": "Burhan",
+      "nama_panggilan": "Nawan",
       "ayah": "Supamiyanto",
       "ibu": "Ibu Lilik Kirana Dewi",
       "instagram": "",
@@ -12,7 +12,7 @@
       "nama_lengkap": "Fira Alfiana Suhadi",
       "nama_panggilan": "Fira",
       "ayah": "Bapak Dede Suhadi",
-      "ibu": "",
+      "ibu": "Ibu Lilis",
       "instagram": "",
       "foto": "images/bride.svg"
     }
@@ -20,44 +20,39 @@
   "acara": {
     "akad": {
       "hari": "Sabtu",
-      "tanggal": "8 Agustus 2026",
-      "jam": "08:00 - 10:00 WIB",
-      "tempat": "Indomaret Cendrawasih 74",
-      "alamat": "Jl. Cendrawasih Raya No.74, Sawah Lama, Kec. Ciputat, Kota Tangerang Selatan, Banten 15413",
+      "tanggal": "5 September 2026",
+      "jam": "09:00 - 10:30 WIB",
+      "tempat": "Jl. Cendrawasih Rt 002 Rw 001 No. 83 Gang Asem",
+      "alamat": "Jl. Cendrawasih Rt 002 Rw 001 No. 83 Gang Asem, Ciputat, Tangerang Selatan",
       "map_link": "https://www.google.com/maps/place/Indomaret+Cendrawasih+74/@-6.2931279,106.7329964,43a,75y,159.08h,80.43t/data=!3m5!1e1!3m3!1sCYqesNDPOyWEG-pSTAabEw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fpanoid%3DCYqesNDPOyWEG-pSTAabEw%26w%3D900%26h%3D600%26ll%3D-6.293128,106.732996%26yaw%3D159.084991%26pitch%3D9.574326%26thumbfov%3D98%26cb_client%3Dgmm.iv.ios!4m6!3m5!1s0x2e69f15bd0a224ef:0x8722c31febc4a0cc!8m2!3d-6.293173899999999!4d106.7328694!10e5?g_ep=CAISEjI2LjI1LjMuOTMyMTI1MTg3MBgAIIGBASpJLDk0Mjk3Njk5LDk0MjMxMTg8LDk0MjgwNTY4LDQ3MDcxNzA0LDk0MjE4NjQxLDk0MjgyMTM0LDEwMDgxMzQ2NCw5NDI4Njg2OUICSUQ%3D&skid=f8e45dad-a780-4294-9df4-94f6538a9738"
     },
     "resepsi": {
       "hari": "Minggu",
-      "tanggal": "9 Agustus 2026",
-      "jam": "11:00 - 14:00 WIB",
-      "tempat": "Sawah Lama",
-      "alamat": "Sawah Lama, Kec. Ciputat, Kota Tangerang Selatan, Banten 15413",
+      "tanggal": "6 September 2026",
+      "jam": "10:30 - 15:00 WIB",
+      "tempat": "Komplek Bonjer No. 178",
+      "alamat": "Komplek Bonjer No. 178, Sawah Lama, Kec. Ciputat, Kota Tangerang Selatan, Banten 15413",
       "map_link": "https://www.google.com/maps/place/Sawah+Lama,+Kec.+Ciputat,+Kota+Tangerang+Selatan,+Banten+15413"
     }
   },
   "countdown": {
-    "target_date": "2026-08-08T08:00:00+07:00"
+    "target_date": "2026-09-05T08:00:00+07:00"
   },
   "love_story": [
     {
-      "tanggal": "September 2021",
-      "judul": "Pertama Bertemu",
-      "deskripsi": "Pertemuan pertama kami yang tak disengaja di sebuah pameran seni rupa kontemporer di Galeri Nasional. Ketertarikan yang sama pada karya seni visual menjadi awal mula obrolan panjang kami."
+      "tanggal": "The First Chapter",
+      "judul": "Pertemuan",
+      "deskripsi": "Tanpa rencana dan tanpa diduga, langkah kami dipertemukan di Sekolah. Berawal dari yang saling menyapa, waktu perlahan menenun kedekatan dari sebuah pertemanan yang sederhana, hingga kami menyadari ada kenyamanan yang berbeda."
     },
     {
-      "tanggal": "Maret 2023",
-      "judul": "Menjalin Hubungan",
-      "deskripsi": "Setelah dua tahun saling mengenal sebagai sahabat dan bertukar pikiran tentang mimpi masing-masing, kami berkomitmen untuk melangkah bersama dalam hubungan yang lebih serius."
+      "tanggal": "The Turning Point",
+      "judul": "Komitmen",
+      "deskripsi": "Sadar bahwa rasa ini tak lagi biasa, kami memilih untuk melangkah lebih jauh. Dengan keyakinan penuh dan restu dari kedua keluarga, kami mengikat janji untuk saling bertumbuh dan mempersiapkan masa depan bersama."
     },
     {
-      "tanggal": "Desember 2025",
-      "judul": "Lamaran (Engagement)",
-      "deskripsi": "Di bawah langit sore yang cerah, di hadapan kedua keluarga besar, Burhan mengutarakan niat suci untuk meminang Fira. Hari yang penuh dengan tangis haru dan kebahagiaan."
-    },
-    {
-      "tanggal": "8 Agustus 2026",
-      "judul": "Hari Pernikahan",
-      "deskripsi": "Hari di mana kami akan mengikat janji suci sehidup semati dalam ikatan pernikahan yang sah, mengukir lembaran baru dalam perjalanan hidup kami bersama."
+      "tanggal": "The Forever Beginning",
+      "judul": "Janji Suci",
+      "deskripsi": "Hari di mana kata 'kamu' dan 'aku' resmi melebur menjadi 'kita'. Di hadapan Sang Pencipta, kami mengucap komitmen seumur hidup, memulai babak baru yang dipenuhi berkah dan kebaikan yang utuh."
     }
   ],
   "galeri": [
@@ -83,20 +78,20 @@
         "logo_type": "mandiri"
       }
     ],
-    "qris_text": "00020101021126360016ID1020304050607085204599953033605802ID5915Burhan and Fira6007Jakarta6105123456304ABCD"
+    "qris_text": "00020101021126360016ID1020304050607085204599953033605802ID5915Nawan and Fira6007Jakarta6105123456304ABCD"
   },
   "music": {
     "youtube_id": "X7SoLnHSUTs",
     "judul": "Music Pernikahan"
   },
   "meta": {
-    "title": "Undangan Pernikahan Burhan & Fira",
+    "title": "Undangan Pernikahan Nawan & Fira",
     "description": "Dengan penuh rasa syukur, kami mengundang Anda untuk menghadiri dan mendoakan pernikahan kami: Burhanudin Gunawan & Fira Alfiana Suhadi.",
     "og_image": "images/cover.svg"
   },
   "ayat": {
     "teks_ar": "وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةً ۗ اِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ",
-    "teks_id": "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berfikir.",
+    "teks_id": "Dan di antara tanda-tanda kebesaran-Nya, Dia menciptakanmu untukku, dan aku untukmu, agar kita menemukan ketenangan dalam dekap yang sama. Dia menumbuhkan kasih dan ketulusan di antara kita, menjadikannya rumah terbaik untuk pulang.",
     "sumber": "Q.S. Ar-Rum: 21"
   }
 }
