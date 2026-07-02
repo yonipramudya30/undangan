@@ -632,37 +632,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    // QRIS graphic dynamically generated using custom inline SVG layout (highly clean and premium)
-    const qrisContainer = document.getElementById("qris-qr-container");
-    if (qrisContainer) {
-      qrisContainer.innerHTML = `
-        <svg viewBox="0 0 200 200" class="w-44 h-44 mx-auto border-4 border-bw-100 rounded-lg p-2 bg-white">
-          <!-- Background QR blocks visual representation -->
-          <rect x="10" y="10" width="40" height="40" fill="#1A1A17" />
-          <rect x="20" y="20" width="20" height="20" fill="#fff" />
-          <rect x="25" y="25" width="10" height="10" fill="#1A1A17" />
-          
-          <rect x="150" y="10" width="40" height="40" fill="#1A1A17" />
-          <rect x="160" y="20" width="20" height="20" fill="#fff" />
-          <rect x="165" y="25" width="10" height="10" fill="#1A1A17" />
-          
-          <rect x="10" y="150" width="40" height="40" fill="#1A1A17" />
-          <rect x="20" y="160" width="20" height="20" fill="#fff" />
-          <rect x="25" y="165" width="10" height="10" fill="#1A1A17" />
-          
-          <!-- Middle dummy code representation -->
-          <path d="M 60,20 H 140 M 60,30 H 100 M 110,35 H 140 M 60,60 H 80 M 100,60 H 120 M 130,65 H 180" stroke="#1A1A17" stroke-width="4" stroke-linecap="round"/>
-          <path d="M 20,60 V 140 M 30,60 V 90 M 35,110 V 140 M 60,80 V 120 M 120,80 V 140 M 140,80 V 120" stroke="#1A1A17" stroke-width="4" stroke-linecap="round"/>
-          <path d="M 60,100 H 140 M 60,120 H 100 M 110,130 H 180 M 60,140 H 80 M 100,150 H 120 M 130,165 H 180" stroke="#1A1A17" stroke-width="4" stroke-linecap="round"/>
-          <path d="M 160,60 V 140 M 170,60 V 90 M 175,110 V 140 M 150,80 V 120 M 180,80 V 140" stroke="#1A1A17" stroke-width="4" stroke-linecap="round"/>
-          
-          <!-- Central Monochrome Heart Badge -->
-          <circle cx="100" cy="100" r="16" fill="#1A1A17" />
-          <path d="M 100,106 C 96,102 92,100 92,96 C 92,93 94.5,91 97.5,91 C 99.2,91 100,92.5 100,92.5 C 100,92.5 100.8,91 102.5,91 C 105.5,91 108,93 108,96 C 108,100 104,102 100,106 Z" fill="#fff" />
-        </svg>
-        <span class="text-[10px] text-bw-400 mt-2 block tracking-widest">PINDAI QRIS UNTUK DONASI</span>
-      `;
-    }
+
   }
 
   // 11. Toast Notifications System
@@ -736,11 +706,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const wishesContainer = document.getElementById("wishes-container");
     
     // Load existing wishes from LocalStorage or default pre-loaded mock list
-    let wishes = JSON.parse(localStorage.getItem("wedding_wishes")) || [
-      { nama: "Bapak Lukman Prasetyo", kehadiran: "hadir", ucapan: "Selamat menempuh hidup baru Burhan & Fira! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. Maaf belum bisa hadir langsung karena masih di luar kota.", waktu: "2 jam yang lalu" },
-      { nama: "Nadia & Rian", kehadiran: "hadir", ucapan: "Happy wedding Fira & Burhan! Senang sekali melihat perjalanan cinta kalian berdua akhirnya bermuara di pelaminan. Cantik dan ganteng sekali hari ini! See you guys soon!", waktu: "3 jam yang lalu" },
-      { nama: "Alifia Zahra", kehadiran: "hadir", ucapan: "Selamat ya Fira sayangg! Lancar-lancar sampai hari H dan bahagia selamanya bareng suami! Amin yra 🤍", waktu: "5 jam yang lalu" }
-    ];
+    let wishes = JSON.parse(localStorage.getItem("wedding_wishes")) || [];
 
     function renderWishes() {
       if (!wishesContainer) return;

@@ -437,6 +437,21 @@
       </div>
     </div>
 
+    <!-- ─── Wishes List ─── -->
+    <div class="floral-header-row" style="margin-top: 40px;">
+      <span class="section-label">Ucapan & Doa Restu</span>
+      <div class="divider-line"></div>
+      <button onclick="clearAllWishes()" style="font-size:10px; color:var(--gray-400); background:none; border:none; cursor:pointer; white-space:nowrap; padding:4px 8px; border-radius:6px; transition:all 0.15s; font-family:var(--font-body);" onmouseover="this.style.background='var(--gray-100)'" onmouseout="this.style.background='none'">
+        <i class="fas fa-trash-alt" style="margin-right:4px;"></i>Hapus Semua
+      </button>
+    </div>
+
+    <div class="admin-card" style="overflow:hidden; padding:0; margin-bottom: 40px;">
+      <div id="wishes-list-container">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
   </main>
 
   <!-- Admin Toast -->
@@ -462,6 +477,9 @@
       loadGuests();
       renderGuestList();
       updateStats();
+
+      loadWishes();
+      renderWishesList();
 
       // Live link preview on typing
       const nameInput = document.getElementById('input-nama');
@@ -704,9 +722,92 @@
 
     // ─── Escape HTML ─────────────────────────────────────────────
     function escapeHtml(str) {
+      if (!str) return '';
       const div = document.createElement('div');
       div.textContent = str;
       return div.innerHTML;
+    }
+
+    // ============================================================
+    // WISHES ADMIN
+    // ============================================================
+    const WISHES_KEY = 'wedding_wishes';
+    let wishes = [];
+
+    function loadWishes() {
+      wishes = JSON.parse(localStorage.getItem(WISHES_KEY)) || [];
+    }
+
+    function saveWishes() {
+      localStorage.setItem(WISHES_KEY, JSON.stringify(wishes));
+    }
+
+    function removeWish(idx) {
+      if (!confirm('Hapus ucapan ini?')) return;
+      wishes.splice(idx, 1);
+      saveWishes();
+      renderWishesList();
+      showAdminToast('Ucapan dihapus.');
+    }
+
+    function clearAllWishes() {
+      if (wishes.length === 0) return;
+      if (!confirm('Hapus semua ucapan?')) return;
+      wishes = [];
+      saveWishes();
+      renderWishesList();
+      showAdminToast('Semua ucapan dihapus.');
+    }
+
+    function renderWishesList() {
+      const container = document.getElementById('wishes-list-container');
+      if (wishes.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-comment-slash"></i>
+            <p>Belum ada ucapan & doa restu.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const rows = wishes.map((w, idx) => `
+        <tr>
+          <td>
+            <div class="guest-name-cell">${escapeHtml(w.nama)}</div>
+            <div style="font-size:10px; color:var(--gray-400); margin-top:2px;">${escapeHtml(w.waktu)}</div>
+          </td>
+          <td>
+            <span style="display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:500; padding:3px 10px; border-radius:20px; background: ${w.kehadiran === 'hadir' ? 'var(--black-soft)' : 'var(--gray-100)'}; color: ${w.kehadiran === 'hadir' ? 'var(--white)' : 'var(--gray-500)'}; border: 1px solid ${w.kehadiran === 'hadir' ? 'var(--black-soft)' : 'var(--gray-200)'};">
+              ${w.kehadiran === 'hadir' ? 'Hadir' : 'Berhalangan'}
+            </span>
+          </td>
+          <td style="font-size:12px; line-height: 1.5; color:var(--gray-600); max-width: 300px;">
+            ${escapeHtml(w.ucapan)}
+          </td>
+          <td>
+            <div class="action-cell">
+              <button class="btn-icon danger" onclick="removeWish(${idx})" title="Hapus Ucapan">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+
+      container.innerHTML = `
+        <table class="guests-table">
+          <thead>
+            <tr>
+              <th>Nama Tamu</th>
+              <th>Kehadiran</th>
+              <th>Ucapan</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      `;
     }
 
     // ─── Boot ────────────────────────────────────────────────────
