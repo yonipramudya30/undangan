@@ -479,7 +479,6 @@
       updateStats();
 
       loadWishes();
-      renderWishesList();
 
       // Live link preview on typing
       const nameInput = document.getElementById('input-nama');
@@ -729,34 +728,56 @@
     }
 
     // ============================================================
-    // WISHES ADMIN
+    // WISHES ADMIN — server-side via wishes.php
     // ============================================================
-    const WISHES_KEY = 'wedding_wishes';
+    const WISHES_API = 'wishes.php';
     let wishes = [];
 
     function loadWishes() {
-      wishes = JSON.parse(localStorage.getItem(WISHES_KEY)) || [];
+      const container = document.getElementById('wishes-list-container');
+      if (container) container.innerHTML = '<div class="empty-state"><i class="fas fa-spinner fa-spin"></i><p>Memuat ucapan...</p></div>';
+      
+      fetch(`${WISHES_API}?action=list`)
+        .then(r => r.json())
+        .then(res => {
+          if (res.success) {
+            wishes = res.data;
+            renderWishesList();
+          }
+        })
+        .catch(() => {
+          showAdminToast('Gagal memuat ucapan dari server.', true);
+        });
     }
 
-    function saveWishes() {
-      localStorage.setItem(WISHES_KEY, JSON.stringify(wishes));
-    }
-
-    function removeWish(idx) {
+    function removeWish(id) {
       if (!confirm('Hapus ucapan ini?')) return;
-      wishes.splice(idx, 1);
-      saveWishes();
-      renderWishesList();
-      showAdminToast('Ucapan dihapus.');
+      fetch(`${WISHES_API}?action=delete&id=${encodeURIComponent(id)}`, { method: 'DELETE' })
+        .then(r => r.json())
+        .then(res => {
+          if (res.success) {
+            loadWishes();
+            showAdminToast('Ucapan dihapus.');
+          } else {
+            showAdminToast('Gagal menghapus ucapan.', true);
+          }
+        })
+        .catch(() => showAdminToast('Gagal menghapus ucapan.', true));
     }
 
     function clearAllWishes() {
       if (wishes.length === 0) return;
-      if (!confirm('Hapus semua ucapan?')) return;
-      wishes = [];
-      saveWishes();
-      renderWishesList();
-      showAdminToast('Semua ucapan dihapus.');
+      if (!confirm('Hapus semua ucapan? Tindakan ini tidak dapat dibatalkan.')) return;
+      fetch(`${WISHES_API}?action=clear`, { method: 'DELETE' })
+        .then(r => r.json())
+        .then(res => {
+          if (res.success) {
+            wishes = [];
+            renderWishesList();
+            showAdminToast('Semua ucapan dihapus.');
+          }
+        })
+        .catch(() => showAdminToast('Gagal menghapus.', true));
     }
 
     function renderWishesList() {
@@ -765,17 +786,18 @@
         container.innerHTML = `
           <div class="empty-state">
             <i class="fas fa-comment-slash"></i>
-            <p>Belum ada ucapan & doa restu.</p>
+            <p>Belum ada ucapan &amp; doa restu.</p>
           </div>
         `;
         return;
       }
 
-      const rows = wishes.map((w, idx) => `
+      const rows = wishes.map((w) => `
         <tr>
           <td>
             <div class="guest-name-cell">${escapeHtml(w.nama)}</div>
             <div style="font-size:10px; color:var(--gray-400); margin-top:2px;">${escapeHtml(w.waktu)}</div>
+            ${w.wa ? `<div style="font-size:10px; color:var(--gray-500); margin-top:2px;"><i class="fab fa-whatsapp" style="color:#25D366;"></i> ${escapeHtml(w.wa)}</div>` : ''}
           </td>
           <td>
             <span style="display:inline-flex; align-items:center; gap:4px; font-size:10px; font-weight:500; padding:3px 10px; border-radius:20px; background: ${w.kehadiran === 'hadir' ? 'var(--black-soft)' : 'var(--gray-100)'}; color: ${w.kehadiran === 'hadir' ? 'var(--white)' : 'var(--gray-500)'}; border: 1px solid ${w.kehadiran === 'hadir' ? 'var(--black-soft)' : 'var(--gray-200)'};">
@@ -787,7 +809,7 @@
           </td>
           <td>
             <div class="action-cell">
-              <button class="btn-icon danger" onclick="removeWish(${idx})" title="Hapus Ucapan">
+              <button class="btn-icon danger" onclick="removeWish('${escapeHtml(w.id)}')" title="Hapus Ucapan">
                 <i class="fas fa-trash-alt"></i>
               </button>
             </div>
@@ -813,6 +835,7 @@
     // ─── Boot ────────────────────────────────────────────────────
     init();
   </script>
+
 
 </body>
 

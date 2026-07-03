@@ -3,7 +3,7 @@
     "pria": {
       "nama_lengkap": "Burhanudin Gunawan",
       "nama_panggilan": "Nawan",
-      "ayah": "Supamiyanto",
+      "ayah": "Bapak Supamiyanto",
       "ibu": "Ibu Lilik Kirana Dewi",
       "instagram": "",
       "foto": "images/groom.svg"
@@ -24,7 +24,7 @@
       "jam": "09:00 - 10:30 WIB",
       "tempat": "Jl. Cendrawasih Rt 002 Rw 001 No. 83 Gang Asem",
       "alamat": "Jl. Cendrawasih Rt 002 Rw 001 No. 83 Gang Asem, Ciputat, Tangerang Selatan",
-      "map_link": "https://www.google.com/maps/place/Indomaret+Cendrawasih+74/@-6.2931279,106.7329964,43a,75y,159.08h,80.43t/data=!3m5!1e1!3m3!1sCYqesNDPOyWEG-pSTAabEw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fpanoid%3DCYqesNDPOyWEG-pSTAabEw%26w%3D900%26h%3D600%26ll%3D-6.293128,106.732996%26yaw%3D159.084991%26pitch%3D9.574326%26thumbfov%3D98%26cb_client%3Dgmm.iv.ios!4m6!3m5!1s0x2e69f15bd0a224ef:0x8722c31febc4a0cc!8m2!3d-6.293173899999999!4d106.7328694!10e5?g_ep=CAISEjI2LjI1LjMuOTMyMTI1MTg3MBgAIIGBASpJLDk0Mjk3Njk5LDk0MjMxMTg8LDk0MjgwNTY4LDQ3MDcxNzA0LDk0MjE4NjQxLDk0MjgyMTM0LDEwMDgxMzQ2NCw5NDI4Njg2OUICSUQ%3D&skid=f8e45dad-a780-4294-9df4-94f6538a9738"
+      "map_link": "https://www.google.com/maps/search/Jl.+Cendrawasih+Rt+002+Rw+001+No.+83+Gang+Asem++Jl.+Cendrawasih+Rt+002+Rw+001+No.+83+Gang+Asem,+Ciputat,+Tangerang+Selatan/@-6.2912801,106.7277133,13z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDYyOS4wIKXMDSoASAFQAw%3D%3D"
     },
     "resepsi": {
       "hari": "Minggu",
@@ -32,7 +32,7 @@
       "jam": "10:30 - 15:00 WIB",
       "tempat": "Jl. Cendrawasih Rt 002 Rw 001 No. 83 Gang Asem",
       "alamat": "Jl. Cendrawasih Rt 002 Rw 001 No. 83 Gang Asem, Ciputat, Tangerang Selatan",
-      "map_link": "https://www.google.com/maps/place/Indomaret+Cendrawasih+74/@-6.2931279,106.7329964,43a,75y,159.08h,80.43t/data=!3m5!1e1!3m3!1sCYqesNDPOyWEG-pSTAabEw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fpanoid%3DCYqesNDPOyWEG-pSTAabEw%26w%3D900%26h%3D600%26ll%3D-6.293128,106.732996%26yaw%3D159.084991%26pitch%3D9.574326%26thumbfov%3D98%26cb_client%3Dgmm.iv.ios!4m6!3m5!1s0x2e69f15bd0a224ef:0x8722c31febc4a0cc!8m2!3d-6.293173899999999!4d106.7328694!10e5?g_ep=CAISEjI2LjI1LjMuOTMyMTI1MTg3MBgAIIGBASpJLDk0Mjk3Njk5LDk0MjMxMTg8LDk0MjgwNTY4LDQ3MDcxNzA0LDk0MjE4NjQxLDk0MjgyMTM0LDEwMDgxMzQ2NCw5NDI4Njg2OUICSUQ%3D&skid=f8e45dad-a780-4294-9df4-94f6538a9738"
+      "map_link": "https://www.google.com/maps/search/Jl.+Cendrawasih+Rt+002+Rw+001+No.+83+Gang+Asem++Jl.+Cendrawasih+Rt+002+Rw+001+No.+83+Gang+Asem,+Ciputat,+Tangerang+Selatan/@-6.2912801,106.7277133,13z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDYyOS4wIKXMDSoASAFQAw%3D%3D"
     }
   },
   "countdown": {
@@ -74,7 +74,7 @@
       {
         "nama_bank": "Mandiri",
         "no_rekening": "1220012677970",
-        "atas_nama": "Fira alfiana subadi",
+        "atas_nama": "Fira Alfiana Suhadi",
         "logo_type": "mandiri"
       }
     ]

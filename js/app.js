@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
     groomImg.src = data.mempelai.pria.foto.replace('.svg', '.jpg');
     groomImg.dataset.srcSvg = data.mempelai.pria.foto;
     document.getElementById("groom-fullname").innerText = data.mempelai.pria.nama_lengkap;
-    document.getElementById("groom-parents").innerText = `Putra dari ${data.mempelai.pria.ayah} & ${data.mempelai.pria.ibu}`;
+    document.getElementById("groom-parents").innerText = `Putra pertama dari ${data.mempelai.pria.ayah} & ${data.mempelai.pria.ibu}`;
     const groomIg = document.getElementById("groom-instagram");
     if (data.mempelai.pria.instagram) {
       groomIg.href = `https://instagram.com/${data.mempelai.pria.instagram}`;
@@ -116,8 +116,8 @@ document.addEventListener("DOMContentLoaded", () => {
     brideImg.dataset.srcSvg = data.mempelai.wanita.foto;
     document.getElementById("bride-fullname").innerText = data.mempelai.wanita.nama_lengkap;
     document.getElementById("bride-parents").innerText = data.mempelai.wanita.ibu 
-      ? `Putri dari ${data.mempelai.wanita.ayah} & ${data.mempelai.wanita.ibu}`
-      : `Putri dari ${data.mempelai.wanita.ayah}`;
+      ? `Putri pertama dari ${data.mempelai.wanita.ayah} & ${data.mempelai.wanita.ibu}`
+      : `Putri pertama dari ${data.mempelai.wanita.ayah}`;
     const brideIg = document.getElementById("bride-instagram");
     if (data.mempelai.wanita.instagram) {
       brideIg.href = `https://instagram.com/${data.mempelai.wanita.instagram}`;
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // For simplicity and premium loading, we use an embed layout of Jakarta Kuningan place
     const embedIframe = document.getElementById("maps-iframe");
     if (embedIframe) {
-      embedIframe.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.5229614488344!2d106.73068071131102!3d-6.293168561440854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f15bd0a224ef%3A0x8722c31febc4a0cc!2sIndomaret+Cendrawasih+74!5e0!3m2!1sid!2sid!4v1719230000000!5m2!1sid!2sid";
+      embedIframe.src = "https://maps.google.com/maps?q=-6.2912801,106.7277133&hl=id&z=17&output=embed";
     }
     const mapGlobalBtn = document.getElementById("global-map-btn");
     if (mapGlobalBtn) {
@@ -700,25 +700,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // 13. RSVP and Guest Wishes submission (saved to LocalStorage & rendered live)
+  // 13. RSVP and Guest Wishes submission (saved server-side via wishes.php)
   function initRSVP() {
     const rsvpForm = document.getElementById("rsvp-form");
     const wishesContainer = document.getElementById("wishes-container");
-    
-    // Load existing wishes from LocalStorage or default pre-loaded mock list
-    let wishes = JSON.parse(localStorage.getItem("wedding_wishes")) || [];
+    const WISHES_API = "wishes.php";
 
-    function renderWishes() {
+    function renderWishes(wishes) {
       if (!wishesContainer) return;
       wishesContainer.innerHTML = "";
-      
-      if (wishes.length === 0) {
+
+      if (!wishes || wishes.length === 0) {
         wishesContainer.innerHTML = `<p class="text-stone-400 text-center italic py-6 text-sm font-light">Belum ada ucapan. Jadilah yang pertama memberikan doa!</p>`;
         return;
       }
 
       wishes.forEach(wish => {
-        const hadirBadge = wish.kehadiran === "hadir" 
+        const hadirBadge = wish.kehadiran === "hadir"
           ? `<span class="bg-bw-900 text-white text-[10px] px-2.5 py-0.5 rounded-full font-medium tracking-wide">Hadir</span>`
           : `<span class="bg-bw-100 text-bw-600 text-[10px] px-2.5 py-0.5 rounded-full border border-bw-200 font-medium tracking-wide">Berhalangan</span>`;
 
@@ -738,13 +736,28 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    renderWishes();
+    function loadWishes() {
+      if (!wishesContainer) return;
+      wishesContainer.innerHTML = `<p class="text-bw-400 text-center italic py-6 text-sm font-light animate-pulse">Memuat ucapan...</p>`;
+      fetch(`${WISHES_API}?action=list`)
+        .then(r => r.json())
+        .then(res => {
+          if (res.success) renderWishes(res.data);
+        })
+        .catch(() => {
+          // Fallback to localStorage for offline
+          const wishes = JSON.parse(localStorage.getItem("wedding_wishes")) || [];
+          renderWishes(wishes);
+        });
+    }
+
+    // Initial load
+    loadWishes();
 
     if (rsvpForm) {
       rsvpForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        // Retrieve field values
         const namaInput = document.getElementById("rsvp-nama");
         const waInput = document.getElementById("rsvp-wa");
         const kehadiranSelect = document.getElementById("rsvp-kehadiran");
@@ -755,50 +768,75 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
-        // Add to wishes array
-        const newWish = {
+        const payload = {
           nama: namaInput.value.trim(),
+          wa: waInput ? waInput.value.trim() : "",
           kehadiran: kehadiranSelect.value,
-          ucapan: ucapanText.value.trim(),
-          waktu: "Baru saja"
+          ucapan: ucapanText.value.trim()
         };
 
-        wishes.unshift(newWish);
-        localStorage.setItem("wedding_wishes", JSON.stringify(wishes));
+        // Disable submit button while sending
+        const submitBtn = rsvpForm.querySelector("button[type='submit']");
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.innerText = "Mengirim..."; }
 
-        // Rerender wishes list
-        renderWishes();
+        fetch(`${WISHES_API}?action=add`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        })
+          .then(r => r.json())
+          .then(res => {
+            if (res.success) {
+              // Reload wishes from server
+              loadWishes();
 
-        // Reset form
-        rsvpForm.reset();
+              // Reset form
+              rsvpForm.reset();
 
-        // Floating label adjustment after reset
-        const floatingLabels = rsvpForm.querySelectorAll("label");
-        floatingLabels.forEach(label => {
-          label.style.top = "1rem";
-          label.style.fontSize = "0.95rem";
-          label.style.opacity = "0.6";
-        });
+              const floatingLabels = rsvpForm.querySelectorAll("label");
+              floatingLabels.forEach(label => {
+                label.style.top = "1rem";
+                label.style.fontSize = "0.95rem";
+                label.style.opacity = "0.6";
+              });
 
-        // Trigger Success feedback
-        showToast("RSVP & Doa Berhasil Dikirim!");
-        
-        // Dynamic confetti/success reveal
-        const successMessage = document.getElementById("rsvp-success");
-        if (successMessage) {
-          successMessage.classList.remove("hidden", "opacity-0");
-          successMessage.classList.add("flex", "opacity-100");
-          setTimeout(() => {
-            successMessage.classList.remove("opacity-100");
-            successMessage.classList.add("opacity-0");
-            setTimeout(() => {
-              successMessage.classList.add("hidden");
-            }, 500);
-          }, 3000);
-        }
+              showToast("RSVP & Doa Berhasil Dikirim!");
+
+              const successMessage = document.getElementById("rsvp-success");
+              if (successMessage) {
+                successMessage.classList.remove("hidden", "opacity-0");
+                successMessage.classList.add("flex", "opacity-100");
+                setTimeout(() => {
+                  successMessage.classList.remove("opacity-100");
+                  successMessage.classList.add("opacity-0");
+                  setTimeout(() => successMessage.classList.add("hidden"), 500);
+                }, 3000);
+              }
+            } else {
+              showToast(res.message || "Gagal mengirim ucapan.");
+            }
+          })
+          .catch(() => {
+            // Offline fallback: save to localStorage
+            const wishes = JSON.parse(localStorage.getItem("wedding_wishes")) || [];
+            wishes.unshift({
+              nama: payload.nama,
+              kehadiran: payload.kehadiran,
+              ucapan: payload.ucapan,
+              waktu: "Baru saja"
+            });
+            localStorage.setItem("wedding_wishes", JSON.stringify(wishes));
+            renderWishes(wishes);
+            rsvpForm.reset();
+            showToast("RSVP & Doa Berhasil Dikirim!");
+          })
+          .finally(() => {
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.innerText = "Kirim Konfirmasi"; }
+          });
       });
     }
   }
+
 
   // 14. Falling Gold Petals Simulation (HTML5 Canvas)
   function initPetals() {
