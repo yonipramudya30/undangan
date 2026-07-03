@@ -656,8 +656,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // 12. Calendar Sync logic (Google, ICS, Outlook)
   function initCalendarSync(data) {
     // Generate .ICS file format content for local devices download (Apple Calendar)
-    const startDate = "20260808T080000+0700";
-    const endDate = "20260809T140000+0700";
+    const startDate = "20260905T090000+0700";
+    const endDate = "20260905T150000+0700";
     const title = `Pernikahan ${data.mempelai.pria.nama_panggilan} & ${data.mempelai.wanita.nama_panggilan}`;
     const description = `Mohon doa restu Anda pada hari bahagia kami. Resepsi diselenggarakan di ${data.acara.resepsi.tempat}, Alamat: ${data.acara.resepsi.alamat}`;
     const location = data.acara.resepsi.tempat;
@@ -682,7 +682,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Bind Google Calendar button
     const googleBtn = document.getElementById("cal-google");
     if (googleBtn) {
-      const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=20260808T010000Z/20260809T070000Z&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`;
+      const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=20260905T020000Z/20260905T080000Z&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`;
       googleBtn.href = gCalUrl;
     }
 
@@ -696,7 +696,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Bind Outlook Calendar button
     const outlookBtn = document.getElementById("cal-outlook");
     if (outlookBtn) {
-      const outCalUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=${encodeURIComponent(title)}&startdt=2026-08-08T08:00:00&enddt=2026-08-09T14:00:00&body=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`;
+      const outCalUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=${encodeURIComponent(title)}&startdt=2026-09-05T09:00:00&enddt=2026-09-05T15:00:00&body=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`;
       outlookBtn.href = outCalUrl;
     }
   }
