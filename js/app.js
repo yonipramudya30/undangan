@@ -144,10 +144,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("resepsi-map-btn").href = data.acara.resepsi.map_link;
     
     // Embed Maps
-    // For simplicity and premium loading, we use an embed layout of Jakarta Kuningan place
     const embedIframe = document.getElementById("maps-iframe");
     if (embedIframe) {
-      embedIframe.src = "https://maps.google.com/maps?q=-6.2912801,106.7277133&hl=id&z=17&output=embed";
+      embedIframe.src = "https://maps.google.com/maps?q=" + encodeURIComponent(data.acara.resepsi.alamat) + "&hl=id&z=17&output=embed";
     }
     const mapGlobalBtn = document.getElementById("global-map-btn");
     if (mapGlobalBtn) {
@@ -560,6 +559,8 @@ document.addEventListener("DOMContentLoaded", () => {
         else if (isMusicPlaying) startEqualizerAnim();
       });
     }
+    // Preload YT API for mobile autoplay
+    loadYTAPI();
 
     // Buka Undangan: open cover + auto-play music
     const openBtn = document.getElementById("btn-buka-undangan");
@@ -569,7 +570,7 @@ document.addEventListener("DOMContentLoaded", () => {
       openBtn.addEventListener("click", () => {
         // Load API and schedule play
         pendingPlay = true;
-        loadYTAPI();
+        playMusic();
 
         // Lift cover
         cover.classList.add("-translate-y-full", "opacity-0");
