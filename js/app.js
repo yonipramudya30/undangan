@@ -739,7 +739,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function loadWishes() {
       if (!wishesContainer) return;
       wishesContainer.innerHTML = `<p class="text-bw-400 text-center italic py-6 text-sm font-light animate-pulse">Memuat ucapan...</p>`;
-      fetch(`${WISHES_API}?action=list`)
+      fetch(`${WISHES_API}?action=list&t=${Date.now()}`)
         .then(r => r.json())
         .then(res => {
           if (res.success) renderWishes(res.data);

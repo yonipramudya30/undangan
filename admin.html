@@ -737,7 +737,7 @@
       const container = document.getElementById('wishes-list-container');
       if (container) container.innerHTML = '<div class="empty-state"><i class="fas fa-spinner fa-spin"></i><p>Memuat ucapan...</p></div>';
       
-      fetch(`${WISHES_API}?action=list`)
+      fetch(`${WISHES_API}?action=list&t=${Date.now()}`)
         .then(r => r.json())
         .then(res => {
           if (res.success) {
