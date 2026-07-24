@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const jpgSrc = imgSrc.replace('.svg', '.jpg');
       const item = `
         <div class="overflow-hidden rounded-2xl cursor-pointer group shadow-sm hover:shadow-lg transition-all duration-500 relative lazy-svg-wrapper aos-init" data-aos="fade-up" data-aos-delay="${idx * 150}">
-          <img src="${jpgSrc}" data-src-svg="${imgSrc}" alt="Prewedding Burhan & Fira ${idx + 1}" class="w-full h-72 object-cover transition-transform duration-700 ease-out group-hover:scale-110 lazy-svg grayscale group-hover:grayscale-0 transition-all" loading="lazy" />
+          <img src="${jpgSrc}" data-src-svg="${imgSrc}" alt="Prewedding Burhan & Fira ${idx + 1}" class="w-full aspect-[2/3] object-cover transition-transform duration-700 ease-out group-hover:scale-110 lazy-svg grayscale group-hover:grayscale-0 transition-all" loading="lazy" />
           <div class="absolute inset-0 bg-bw-900/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
             <div class="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center text-bw-900 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
               <i class="fas fa-search-plus"></i>
