@@ -1,4 +1,4 @@
-const CACHE_NAME = 'wedding-invitation-cache-v5';
+const CACHE_NAME = 'wedding-invitation-cache-v7';
 const ASSETS = [
   '/',
   '/index.html',
@@ -11,6 +11,9 @@ const ASSETS = [
   '/images/gallery1.svg',
   '/images/gallery2.svg',
   '/images/gallery3.svg',
+  '/images/gallery4.svg',
+  '/images/gallery5.svg',
+  '/images/gallery6.svg',
   '/manifest.json'
 ];
 
