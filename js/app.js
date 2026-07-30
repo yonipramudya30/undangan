@@ -145,8 +145,9 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Embed Maps
     const embedIframe = document.getElementById("maps-iframe");
+    const mapQuery = data.acara.resepsi.map_coordinate || data.acara.resepsi.alamat;
     if (embedIframe) {
-      embedIframe.src = "https://maps.google.com/maps?q=" + encodeURIComponent(data.acara.resepsi.alamat) + "&hl=id&z=17&output=embed";
+      embedIframe.src = "https://maps.google.com/maps?q=" + encodeURIComponent(mapQuery) + "&hl=id&z=17&output=embed";
     }
     const mapGlobalBtn = document.getElementById("global-map-btn");
     if (mapGlobalBtn) {
@@ -154,7 +155,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     const navGlobalBtn = document.getElementById("global-nav-btn");
     if (navGlobalBtn) {
-      navGlobalBtn.href = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(data.acara.resepsi.alamat)}`;
+      navGlobalBtn.href = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(mapQuery)}`;
+    }
+    const globalMapAlamat = document.getElementById("global-map-alamat");
+    if (globalMapAlamat) {
+      globalMapAlamat.innerText = data.acara.resepsi.alamat;
     }
 
     // Love Story
