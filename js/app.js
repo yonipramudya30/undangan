@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const groomImg = document.getElementById("groom-img");
     groomImg.src = data.mempelai.pria.foto.replace('.svg', '.jpg');
     groomImg.dataset.srcSvg = data.mempelai.pria.foto;
-    document.getElementById("groom-fullname").innerText = data.mempelai.pria.nama_lengkap;
+    document.getElementById("groom-fullname").innerHTML = data.mempelai.pria.nama_lengkap;
     document.getElementById("groom-parents").innerText = `Putra pertama dari ${data.mempelai.pria.ayah} & ${data.mempelai.pria.ibu}`;
     const groomIg = document.getElementById("groom-instagram");
     if (data.mempelai.pria.instagram) {
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const brideImg = document.getElementById("bride-img");
     brideImg.src = data.mempelai.wanita.foto.replace('.svg', '.jpg');
     brideImg.dataset.srcSvg = data.mempelai.wanita.foto;
-    document.getElementById("bride-fullname").innerText = data.mempelai.wanita.nama_lengkap;
+    document.getElementById("bride-fullname").innerHTML = data.mempelai.wanita.nama_lengkap;
     document.getElementById("bride-parents").innerText = data.mempelai.wanita.ibu 
       ? `Putri pertama dari ${data.mempelai.wanita.ayah} & ${data.mempelai.wanita.ibu}`
       : `Putri pertama dari ${data.mempelai.wanita.ayah}`;

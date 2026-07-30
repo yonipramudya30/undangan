@@ -1,7 +1,7 @@
 {
   "mempelai": {
     "pria": {
-      "nama_lengkap": "Burhannudin Gunawan",
+      "nama_lengkap": "Burhannudin <br> Gunawan S.M",
       "nama_panggilan": "Nawan",
       "ayah": "Bapak Supamiyanto",
       "ibu": "Ibu Lilik Kirana Dewi",
@@ -9,7 +9,7 @@
       "foto": "images/groom.svg"
     },
     "wanita": {
-      "nama_lengkap": "Fira Alfiana Suhadi",
+      "nama_lengkap": "Fira Alfiana <br> Suhadi",
       "nama_panggilan": "Fira",
       "ayah": "Bapak Dede Suhadi",
       "ibu": "Ibu Lilis",
