@@ -1,7 +1,7 @@
 const CACHE_NAME = 'wedding-invitation-cache-v7';
 const ASSETS = [
   '/',
-  '/index.html',
+  '/undangandigital.html',
   '/css/style.css',
   '/js/app.js',
   '/data/wedding.json',
