@@ -18,27 +18,18 @@
     }
   },
   "acara": {
-    "akad": {
-      "hari": "Sabtu",
-      "tanggal": "5 September 2026",
-      "jam": "09:00 - 10:30 WIB",
-      "tempat": "Jl. Cendrawasih, Gang Asem No.83",
-      "alamat": "Jl. Cendrawasih, Gang Asem No.83, Sawah Lama, Kec. Ciputat, Kota Tangerang Selatan, Banten 15413",
-      "map_link": "https://www.google.com/maps/place/RM.+DUA+SAUDARA/@-6.2934702,106.7326355,18.62z/data=!4m6!3m5!1s0x2e69f1614fd300ad:0x7957a984cfb0640e!8m2!3d-6.2935549!4d106.7330356!16s%2Fg%2F11vqs8p23l!18m1!1e1",
-      "map_coordinate": "-6.2935549, 106.7330356"
-    },
-    "resepsi": {
-      "hari": "Sabtu",
-      "tanggal": "5 September 2026",
-      "jam": "10:30 - Selesai",
-      "tempat": "Jl. Cendrawasih, Gang Asem No.83",
-      "alamat": "Jl. Cendrawasih, Gang Asem No.83, Sawah Lama, Kec. Ciputat, Kota Tangerang Selatan, Banten 15413",
-      "map_link": "https://www.google.com/maps/place/RM.+DUA+SAUDARA/@-6.2934702,106.7326355,18.62z/data=!4m6!3m5!1s0x2e69f1614fd300ad:0x7957a984cfb0640e!8m2!3d-6.2935549!4d106.7330356!16s%2Fg%2F11vqs8p23l!18m1!1e1",
-      "map_coordinate": "-6.2935549, 106.7330356"
+    "ngunduh_mantu": {
+      "hari": "Minggu",
+      "tanggal": "6 September 2026",
+      "jam": "09.00 - Selesai",
+      "tempat": "Jl Musyawarah, Komplek Bonjer No 178",
+      "alamat": "Jl Musyawarah, Komplek Bonjer No 178 Sawah Lama, Kec. Ciputat, Kota Tangerang Selatan, Banten 15413",
+      "map_link": "https://google.com/maps?q=-6.30425500869751,106.73664093017578&z=17&hl=en",
+      "map_coordinate": "-6.30425500869751, 106.73664093017578"
     }
   },
   "countdown": {
-    "target_date": "2026-09-05T08:00:00+07:00"
+    "target_date": "2026-09-06T09:00:00+07:00"
   },
   "love_story": [
     {
