@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Cover Page Names & Date
     document.getElementById("cover-pria-nama").innerText = data.mempelai.pria.nama_panggilan;
     document.getElementById("cover-wanita-nama").innerText = data.mempelai.wanita.nama_panggilan;
-    document.getElementById("cover-wedding-date").innerText = data.acara.ngunduh_mantu.tanggal;
+    document.getElementById("cover-wedding-date").innerText = data.acara.akad.tanggal;
 
     // Hero / Header Section Names
     document.getElementById("hero-pria-nama").innerText = data.mempelai.pria.nama_panggilan;
@@ -127,23 +127,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Event Details (Acara)
-    // Ngunduh Mantu
-    document.getElementById("ngunduh-hari").innerText = data.acara.ngunduh_mantu.hari;
-    document.getElementById("ngunduh-tanggal").innerText = data.acara.ngunduh_mantu.tanggal;
-    document.getElementById("ngunduh-jam").innerText = data.acara.ngunduh_mantu.jam;
-    document.getElementById("ngunduh-tempat").innerText = data.acara.ngunduh_mantu.tempat;
-    document.getElementById("ngunduh-alamat").innerText = data.acara.ngunduh_mantu.alamat;
-    document.getElementById("ngunduh-map-btn").href = data.acara.ngunduh_mantu.map_link;
+    // Akad
+    document.getElementById("akad-hari").innerText = data.acara.akad.hari;
+    document.getElementById("akad-tanggal").innerText = data.acara.akad.tanggal;
+    document.getElementById("akad-jam").innerText = data.acara.akad.jam;
+    document.getElementById("akad-tempat").innerText = data.acara.akad.tempat;
+    document.getElementById("akad-alamat").innerText = data.acara.akad.alamat;
+    document.getElementById("akad-map-btn").href = data.acara.akad.map_link;
+
+    // Resepsi
+    document.getElementById("resepsi-hari").innerText = data.acara.resepsi.hari;
+    document.getElementById("resepsi-tanggal").innerText = data.acara.resepsi.tanggal;
+    document.getElementById("resepsi-jam").innerText = data.acara.resepsi.jam;
+    document.getElementById("resepsi-tempat").innerText = data.acara.resepsi.tempat;
+    document.getElementById("resepsi-alamat").innerText = data.acara.resepsi.alamat;
+    document.getElementById("resepsi-map-btn").href = data.acara.resepsi.map_link;
     
     // Embed Maps
     const embedIframe = document.getElementById("maps-iframe");
-    const mapQuery = data.acara.ngunduh_mantu.map_coordinate || data.acara.ngunduh_mantu.alamat;
+    const mapQuery = data.acara.resepsi.map_coordinate || data.acara.resepsi.alamat;
     if (embedIframe) {
       embedIframe.src = "https://maps.google.com/maps?q=" + encodeURIComponent(mapQuery) + "&hl=id&z=17&output=embed";
     }
     const mapGlobalBtn = document.getElementById("global-map-btn");
     if (mapGlobalBtn) {
-      mapGlobalBtn.href = data.acara.ngunduh_mantu.map_link;
+      mapGlobalBtn.href = data.acara.resepsi.map_link;
     }
     const navGlobalBtn = document.getElementById("global-nav-btn");
     if (navGlobalBtn) {
@@ -151,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     const globalMapAlamat = document.getElementById("global-map-alamat");
     if (globalMapAlamat) {
-      globalMapAlamat.innerText = data.acara.ngunduh_mantu.alamat;
+      globalMapAlamat.innerText = data.acara.resepsi.alamat;
     }
 
     // Love Story
@@ -653,11 +661,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // 12. Calendar Sync logic (Google, ICS, Outlook)
   function initCalendarSync(data) {
     // Generate .ICS file format content for local devices download (Apple Calendar)
-    const startDate = "20260906T090000+0700";
-    const endDate = "20260906T170000+0700";
-    const title = `TASYAKURAN NGUNDUH MANTU ${data.mempelai.pria.nama_panggilan} & ${data.mempelai.wanita.nama_panggilan}`;
-    const description = `Mohon doa restu Anda pada hari bahagia kami. TASYAKURAN NGUNDUH MANTU diselenggarakan di ${data.acara.ngunduh_mantu.tempat}, Alamat: ${data.acara.ngunduh_mantu.alamat}`;
-    const location = data.acara.ngunduh_mantu.tempat;
+    const startDate = "20260905T090000+0700";
+    const endDate = "20260905T150000+0700";
+    const title = `Pernikahan ${data.mempelai.pria.nama_panggilan} & ${data.mempelai.wanita.nama_panggilan}`;
+    const description = `Mohon doa restu Anda pada hari bahagia kami. Resepsi diselenggarakan di ${data.acara.resepsi.tempat}, Alamat: ${data.acara.resepsi.alamat}`;
+    const location = data.acara.resepsi.tempat;
 
     const icsContent = 
       "BEGIN:VCALENDAR\n" +
@@ -679,7 +687,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Bind Google Calendar button
     const googleBtn = document.getElementById("cal-google");
     if (googleBtn) {
-      const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=20260906T020000Z/20260906T100000Z&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`;
+      const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=20260905T020000Z/20260905T080000Z&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`;
       googleBtn.href = gCalUrl;
     }
 
@@ -693,7 +701,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Bind Outlook Calendar button
     const outlookBtn = document.getElementById("cal-outlook");
     if (outlookBtn) {
-      const outCalUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=${encodeURIComponent(title)}&startdt=2026-09-06T09:00:00&enddt=2026-09-06T17:00:00&body=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`;
+      const outCalUrl = `https://outlook.live.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=${encodeURIComponent(title)}&startdt=2026-09-05T09:00:00&enddt=2026-09-05T15:00:00&body=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`;
       outlookBtn.href = outCalUrl;
     }
   }

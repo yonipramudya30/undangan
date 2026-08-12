@@ -567,7 +567,7 @@
       const link = document.getElementById('link-preview-text').textContent;
       const name = document.getElementById('input-nama').value.trim() || 'Tamu';
       if (!link || link === '—') return;
-      const msg = `Assalamu'alaikum ${name},\n\nKami mengundang Anda untuk menghadiri pernikahan kami:\n\nNawan & Fira\nMinggu, 6 September 2026\n\nSilakan buka undangan online Anda di sini:\n${link}\n\nMerupakan suatu kehormatan jika Anda berkenan hadir.`;
+      const msg = `Assalamu'alaikum ${name},\n\nKami mengundang Anda untuk menghadiri pernikahan kami:\n\nNawan & Fira\nSabtu, 5 September 2026\n\nSilakan buka undangan online Anda di sini:\n${link}\n\nMerupakan suatu kehormatan jika Anda berkenan hadir.`;
       window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
     }
 
@@ -589,7 +589,7 @@
     function shareGuestWA(id) {
       const guest = guests.find(g => g.id === id);
       if (!guest) return;
-      const msg = `Assalamu'alaikum ${guest.name},\n\nKami mengundang Anda untuk menghadiri pernikahan kami:\n\nNawan & Fira\nMinggu, 6 September 2026\n\nSilakan buka undangan online Anda di sini:\n${guest.link}\n\nMerupakan suatu kehormatan jika Anda berkenan hadir.`;
+      const msg = `Assalamu'alaikum ${guest.name},\n\nKami mengundang Anda untuk menghadiri pernikahan kami:\n\nNawan & Fira\nSabtu, 5 September 2026\n\nSilakan buka undangan online Anda di sini:\n${guest.link}\n\nMerupakan suatu kehormatan jika Anda berkenan hadir.`;
       window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
       // Mark as shared
       guest.shared = true;
